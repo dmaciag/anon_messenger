@@ -24,7 +24,7 @@
           </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit" style="max-width: 148px; display: inline-block;">Sign in</button>
-        <button type="button" class="btn btn-default" style="margin-left: 2px !important; padding: 12px 46px !important;">Register</button>
+        <button onclick="window.location.href='./app/register.php'" type="button" class="btn btn-default" style="margin-left: 2px !important; padding: 12px 46px !important;">Register</button>
       </form>
     </div>
   </body>
