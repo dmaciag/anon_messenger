@@ -1,6 +1,7 @@
 {
   "name": "financially_unstable",
-  "version": "1.0.1",
+  "email": "mirlol.and.hydra@gmail.com",
+  "version": "1.0.0",
   "private": false,
   "dependencies": {},
   "devDependencies": {
@@ -25,5 +26,10 @@
   },
   "engines": {
     "node": "4.2.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dmaciag/financially_unstable.git"
+  },
+  "license": "Apache-2.0"
 }

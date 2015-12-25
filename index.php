@@ -9,9 +9,7 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title>Sign in</title>
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+    <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
     <div class="container">
@@ -29,7 +27,6 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit" style="max-width: 148px; display: inline-block;">Sign in</button>
         <button type="button" class="btn btn-default" style="margin-left: 2px !important; padding: 12px 46px !important;">Register</button>
       </form>
-    </div> 
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    </div>
   </body>
 </html>
