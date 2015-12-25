@@ -7,7 +7,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-
     <title>Sign in</title>
     <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
   </head>
