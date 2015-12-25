@@ -1,0 +1,1 @@
+This is a financial project that can manage income, expenses, and overal financial stability of a user or household.
