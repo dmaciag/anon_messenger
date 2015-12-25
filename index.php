@@ -11,8 +11,6 @@
     <title>Sign in</title>
     <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    <!--<link href="signin.css" rel="stylesheet">-->
-    <link type="text/css" href="./css/styles.css" rel="stylesheet">
     <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
   </head>
   <body>
