@@ -1,20 +1,16 @@
 <?php
 
-$server = "localhost";
+$hostname = "localhost";
 $username = "root";
 $password = "root";
 $db = "my_db";
 
-$conn = new mysqli($server, $username, $password, $db);
-
-if($conn->connect_error){
-	die("Connection failed.\n");
-}
+mysql_connect("$hostname", )
 
 $email = $_POST[email];
 $password = $_POST[password];
 
-$sql = "SELECT * FROM registered_users WHERE username = \"$email\"";
+$sql = "SELECT username, password FROM registered_users WHERE username = \"$email\"";
 $registered_users = $conn->query($sql);
 
 if($registered_users->num_rows == 1 ){
