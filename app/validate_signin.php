@@ -1,9 +1,6 @@
 <?php
 
-$hostname = "localhost";
-$username = "root";
-$password = "root";
-$db = "my_db";
+require "./../config.php";
 
 $connect = mysql_connect($hostname, $username, $password);
 
