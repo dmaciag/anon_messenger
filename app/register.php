@@ -6,25 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-    <title>Sign in</title>
-    <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <title>Register</title>
+    <link href="./../bootstrap/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
     <div class="container">
-      <form class="form-signin" action="./app/validate_signin.php" method="post" style="max-width: 300px !important; margin-left: 50%; margin-right: 50%; margin:auto;">
-        <h2 class="form-signin-heading" >Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" name="email" id="inputEmail" style="margin-bottom: 4px;" class="form-control"  placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox" >
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me?
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" style="max-width: 148px; display: inline-block;">Sign in</button>
-        <button onclick="window.location.href='./app/register.php'" type="button" class="btn btn-default" style="margin-left: 2px !important; padding: 12px 46px !important;">Register</button>
+      <form class="form-signin" action="./validate_register.php" method="post" style="max-width: 300px !important; margin-left: 50%; margin-right: 50%; margin:auto;">
+        <h2 class="form-signin-heading" >Please Register</h2>
+        Name: 
+        <label for="first_name" class="sr-only">First</label>
+        <input type="text" name="first_name" id="first_name" style="margin-bottom: 4px;" class="form-control"  placeholder="First" required>
+        <label for="last_name" class="sr-only">Last</label>
+        <input type="text" name="last_name" id="last_name" style="margin-bottom: 4px;" class="form-control"  placeholder="Last" required>        
+        Create a password: 
+        <label for="inputPassword_first" class="sr-only">Password</label>
+        <input type="password" name="password_first" id="inputPassword_first" class="form-control" placeholder="Password" required>
+        Confirm your password: 
+        <label for="inputPassword_second" class="sr-only">Confirm Password</label>
+        <input type="password" name="password_second" id="inputPassword_second" class="form-control" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" style="max-width: 300px; display: inline-block;">Register</button>
       </form>
     </div>
   </body>

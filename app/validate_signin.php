@@ -31,6 +31,7 @@ if( mysql_num_rows($registered_users) == 1 ){
 
 	if( $user["username"] == $email && $user["password"] == $password ){
 		echo "Welcome, $email !";
+		
 	}
 	else{
 		echo "Invalid password !";
