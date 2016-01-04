@@ -12,18 +12,15 @@
   <body>
     <div class="container">
       <form class="form-signin" action="./validate_register.php" method="post" style="max-width: 300px !important; margin-left: 50%; margin-right: 50%; margin:auto;">
-        <h2 class="form-signin-heading" >Please Register</h2>
-        Name: 
-        <label for="first_name" class="sr-only">First</label>
-        <input type="text" name="first_name" id="first_name" style="margin-bottom: 4px;" class="form-control"  placeholder="First" required>
-        <label for="last_name" class="sr-only">Last</label>
-        <input type="text" name="last_name" id="last_name" style="margin-bottom: 4px;" class="form-control"  placeholder="Last" required>        
-        Create a password: 
+        <h2 class="form-signin-heading" >Enter information</h2>
+        <label for="nickname" class="sr-only">Nickname</label>
+        <input type="text" name="nickname" id="nickname" style="margin-bottom: 4px;" class="form-control"  placeholder="Nickname" required>
+        <label for="last_name" class="sr-only">Email</label>
+        <input type="email" name="email" id="email" style="margin-bottom: 4px;" class="form-control"  placeholder="Email" required>
         <label for="inputPassword_first" class="sr-only">Password</label>
-        <input type="password" name="password_first" id="inputPassword_first" class="form-control" placeholder="Password" required>
-        Confirm your password: 
+        <input type="password" name="password_first" id="inputPassword_first" style="margin-bottom: 4px;" class="form-control" placeholder="Password" required>
         <label for="inputPassword_second" class="sr-only">Confirm Password</label>
-        <input type="password" name="password_second" id="inputPassword_second" class="form-control" placeholder="Password" required>
+        <input type="password" name="password_second" id="inputPassword_second" style="margin-bottom: 4px;" class="form-control" placeholder="Confirm Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit" style="max-width: 300px; display: inline-block;">Register</button>
       </form>
     </div>
