@@ -1,8 +1,8 @@
 <?php
 
-$hostname = "localhost";
-$username = "root";
-$password = "root";
-$db = "my_db";
+$db_hostname = "localhost";
+$db_username = "root";
+$db_password = "root";
+$db_db = "my_db";
 
 ?>
