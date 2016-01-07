@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require 'functions.php';
+require '../functions.php';
 
 if( $_SESSION['is_logged_in'] ){
 	session_destroy();
