@@ -1,6 +1,7 @@
 <?php
 
 require "./../config.php";
+require "../functions.php";
 
 $connect = mysql_connect($db_hostname, $db_username, $db_password);
 
@@ -9,10 +10,10 @@ if( !$connect ) die('Connection to mysql failed, error : ' . mysql_error());
 if( !mysql_select_db($db_db) ) die('Cannot connect to db : $db_db, ' . mysql_error());
 
 $username = $_POST[username];
-$username = stripslashes($username);
+$username = strip_data($username);
 
 $password = $_POST[password];
-$password = stripslashes($password);
+$password = strip_data($password);
 
 $user_pass_sql = "SELECT username, password FROM registered_users WHERE username = \"$username\"";
 $registered_users = mysql_query($user_pass_sql);
