@@ -33,9 +33,9 @@ if($password != $conf_pas){
 	die('Passwords are different');
 }
 
-if(		empty($username) || 
-		empty($email) || 
-		empty($password) 
+if(	empty($username) || 
+	empty($email) || 
+	empty($password) 
   ) 
 {
 	if( !header("Location: http://localhost/app/register.php") )
