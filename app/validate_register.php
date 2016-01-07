@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require "../config.php";
 require "../functions.php";
 
@@ -45,9 +47,12 @@ if( !$registered_users ){
 }
 
 if( mysql_num_rows($registered_users) >= 1 ){
-	$user_exists_already = true;
+	$_SESSION['user_already_exists_in_db'] = true;
 	if( !redirect_register() ) die( 'Did not redirect to registration from registration properly' );
 
+}
+else{
+	$_SESSION['user_already_exists_in_db'] = false;
 }
 
 $regisitration_sql = "INSERT INTO registered_users (username, email, password)	VALUES ('$username', '$email', '$password')";

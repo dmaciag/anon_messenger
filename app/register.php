@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,10 +20,8 @@
       <form id="form_check_password" class="form-signin" action="./validate_register.php" method="post" style="max-width: 300px !important; margin-left: 50%; margin-right: 50%; margin:auto;">
         <h2 class="form-signin-heading" >Enter information</h2>
         <?php 
-              require '../config.php'; 
-              if( $user_exists_already ) {
-                  $user_exists_already = false;
-                  echo 'User already exists'; 
+              if( $_SESSION['user_already_exists_in_db'] ) {
+                  echo "<p>   User already exists </p>"; 
               }
         ?>
         <label for="username" class="sr-only">Username</label>
