@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require "./../config.php";
 require "../functions.php";
 
@@ -30,12 +32,13 @@ if( mysql_num_rows($registered_users) == 1 ){
 
 	if( $user["username"] == $username && $user["password"] == $password ){
 		$_SESSION['is_logged_in'] = true;
+		$_SESSION['username'] = $username;
 		if( !redirect_messenger() ) die( 'did not redirect to messenger from signin' );
-		
 	}
 	else{
 		echo "Invalid password !";
 	}
+
 }
 else{
 	echo "User is not registered. " .'<br>';
