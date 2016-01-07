@@ -44,8 +44,8 @@ if(	empty($username) ||
 	}
 }
 
-$regisitration_sql = "INSERT INTO registered_users (username, email, password)
-					  VALUES ('$username', '$email', '$password')";
+$regisitration_sql =   "INSERT INTO registered_users (username, email, password)
+						VALUES ('$username', '$email', '$password')";
 
 if( !mysql_query($regisitration_sql) ) die('Cannot register user to database, error: ' . mysql_error());
 
