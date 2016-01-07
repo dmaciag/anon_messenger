@@ -30,7 +30,7 @@
 $("#form_check_password").validate({
   rules: {
                     password_first: { 
-                  required: true,
+                    required: true,
                     minlength: 3,
                     maxlength: 40,
 
