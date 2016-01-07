@@ -15,6 +15,13 @@
     <div class="container">
       <form id="form_check_password" class="form-signin" action="./validate_register.php" method="post" style="max-width: 300px !important; margin-left: 50%; margin-right: 50%; margin:auto;">
         <h2 class="form-signin-heading" >Enter information</h2>
+        <?php 
+              require '../config.php'; 
+              if( $user_exists_already ) {
+                  $user_exists_already = false;
+                  echo 'User already exists'; 
+              }
+        ?>
         <label for="username" class="sr-only">Username</label>
         <input type="text" name="username" id="username" style="margin-bottom: 4px;" class="form-control"  placeholder="Username" required>
         <label for="last_name" class="sr-only">Email</label>

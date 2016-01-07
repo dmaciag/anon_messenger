@@ -1,6 +1,8 @@
 <?php
 
-header("Location: http://localhost/app/signin.php");
+require 'functions.php';
+
+redirect_signin();
 
 ?>
 

@@ -19,26 +19,43 @@ $email 	  = strip_data($email);
 $password = strip_data($password);
 $conf_pas = strip_data($conf_pas);
 
-
 if( $password != $conf_pas ){
 	die('Passwords are different');
 }
 
-if(	empty($username) || 
-	empty($email) || 
+if(	
+	empty($username) ||
+	empty($email)    ||
 	empty($password) 
   ) 
 {
-	if( !header("Location: http://localhost/app/register.php") )
+	if( !redirect_register() )
 	{
 		die('something terrible has gone wrong in the registration due to empty arguments');
 	}
+}
+
+$check_if_exists_user_sql = "SELECT username FROM registered_users WHERE username = \"$username\"";
+$registered_users = mysql_query($check_if_exists_user_sql);
+
+if( !$registered_users ){
+	$error_mesage  = 'Invalid query error: ' . mysql_error() . "\n";
+	$error_mesage .= 'Desired query: ' . $user_pass_sql;
+	die( $error_mesage );
+}
+
+if( mysql_num_rows($registered_users) >= 1 ){
+	$user_exists_already = true;
+	if( !redirect_register() ) die( 'Did not redirect to registration from registration properly' );
+
 }
 
 $regisitration_sql = "INSERT INTO registered_users (username, email, password)	VALUES ('$username', '$email', '$password')";
 
 if( !mysql_query($regisitration_sql) ) die('Cannot register user to database, error: ' . mysql_error());
 
-echo "successfuly Registered.\n";
+if ( !redirect_messenger() ) die('Did not redirect to messenger from registration properly');
+
+echo "successfuly Registered, but you shouldn't see this\n";
 
 ?>

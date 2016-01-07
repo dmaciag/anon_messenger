@@ -10,9 +10,9 @@ if( !$connect ) die('Connection to mysql failed, error : ' . mysql_error());
 if( !mysql_select_db($db_db) ) die('Cannot connect to db : $db_db, ' . mysql_error());
 
 $username = $_POST[username];
-$username = strip_data($username);
-
 $password = $_POST[password];
+
+$username = strip_data($username);
 $password = strip_data($password);
 
 $user_pass_sql = "SELECT username, password FROM registered_users WHERE username = \"$username\"";
@@ -29,6 +29,7 @@ if( mysql_num_rows($registered_users) == 1 ){
 	$user = mysql_fetch_assoc($registered_users);
 
 	if( $user["username"] == $username && $user["password"] == $password ){
+		
 		echo "Welcome, $username !";
 		
 	}
