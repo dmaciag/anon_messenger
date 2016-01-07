@@ -59,6 +59,8 @@ $regisitration_sql = "INSERT INTO registered_users (username, email, password)	V
 
 if( !mysql_query($regisitration_sql) ) die('Cannot register user to database, error: ' . mysql_error());
 
+$_SESSION['is_logged_in'] = true;
+
 if ( !redirect_messenger() ) die('Did not redirect to messenger from registration properly');
 
 echo "successfuly Registered, but you shouldn't see this\n";

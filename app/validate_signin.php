@@ -29,8 +29,8 @@ if( mysql_num_rows($registered_users) == 1 ){
 	$user = mysql_fetch_assoc($registered_users);
 
 	if( $user["username"] == $username && $user["password"] == $password ){
-		
-		echo "Welcome, $username !";
+		$_SESSION['is_logged_in'] = true;
+		if( !redirect_messenger() ) die( 'did not redirect to messenger from signin' );
 		
 	}
 	else{
