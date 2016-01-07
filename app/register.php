@@ -24,12 +24,13 @@
         <label for="inputPassword_second" class="sr-only">Confirm Password</label>
         <input type="password" name="password_second" id="inputPassword_second" style="margin-bottom: 4px;" class="form-control" placeholder="Confirm Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit" style="max-width: 300px; display: inline-block;">Register</button>
-      </form>
+      </form>   
+    </div>
 <script type="text/javascript">
 $("#form_check_password").validate({
-	rules: {
+  rules: {
                     password_first: { 
-                 	required: true,
+                  required: true,
                     minlength: 3,
                     maxlength: 40,
 
@@ -41,12 +42,11 @@ $("#form_check_password").validate({
                }
            },
     messages: {
-    	password: {
-    		required: "the password is required"
-    	}
+      password: {
+        required: "the password is required"
+      }
     }
 });
-</script>      
-    </div>
+</script>   
   </body>
 </html>
