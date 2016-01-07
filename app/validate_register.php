@@ -29,7 +29,7 @@ $password = strip_data($password);
 $conf_pas = strip_data($conf_pas);
 
 
-if( $password != $conf_pas) {
+if( $password != $conf_pas ){
 	die('Passwords are different');
 }
 
