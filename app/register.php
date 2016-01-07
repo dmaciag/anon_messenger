@@ -25,9 +25,7 @@
         <input type="password" name="password_second" id="inputPassword_second" style="margin-bottom: 4px;" class="form-control" placeholder="Confirm Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit" style="max-width: 300px; display: inline-block;">Register</button>
       </form>
-      
 <script type="text/javascript">
-
 $("#form_check_password").validate({
 	rules: {
                     password_first: { 
@@ -41,8 +39,6 @@ $("#form_check_password").validate({
                     minlength: 3,
                     maxlength: 40,
                }
-
-
            },
     messages: {
     	password: {
@@ -50,7 +46,6 @@ $("#form_check_password").validate({
     	}
     }
 });
-
 </script>      
     </div>
   </body>
