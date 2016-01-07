@@ -8,13 +8,13 @@ if( !$connect ) die('Connection to mysql failed, error : ' . mysql_error());
 
 if( !mysql_select_db($db_db) ) die('Cannot connect to db : $db_db, ' . mysql_error());
 
-$email = $_POST[email];
-$email = stripslashes($email);
+$username = $_POST[username];
+$username = stripslashes($username);
 
 $password = $_POST[password];
 $password = stripslashes($password);
 
-$user_pass_sql = "SELECT username, password FROM registered_users WHERE username = \"$email\"";
+$user_pass_sql = "SELECT username, password FROM registered_users WHERE username = \"$username\"";
 $registered_users = mysql_query($user_pass_sql);
 
 if( !$registered_users ){
@@ -27,8 +27,8 @@ if( mysql_num_rows($registered_users) == 1 ){
 	
 	$user = mysql_fetch_assoc($registered_users);
 
-	if( $user["username"] == $email && $user["password"] == $password ){
-		echo "Welcome, $email !";
+	if( $user["username"] == $username && $user["password"] == $password ){
+		echo "Welcome, $username !";
 		
 	}
 	else{
