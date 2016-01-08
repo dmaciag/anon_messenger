@@ -12,3 +12,16 @@
 #email{
 	margin-bottom: 4px;
 }
+
+#inputPassword_first{
+	margin-bottom: 4px;
+}
+
+#inputPassword_second{
+	margin-bottom: 4px;
+}
+
+#register_button{
+	max-width: 300px; 
+	display: inline-block;
+}

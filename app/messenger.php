@@ -16,7 +16,7 @@
     <link rel="icon" href="../../favicon.ico">
     <title>Messenger</title>
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/messenger.css" rel ="alternate stylesheet">
+    <link href="../css/messenger.css" type="text/css" rel ="stylesheet">
     <script>
       function display_friend(str) {
           if (str == "") {
@@ -24,29 +24,27 @@
               return;
           } else {
               if (window.XMLHttpRequest) {
-                  // code for IE7+, Firefox, Chrome, Opera, Safari
-                  xmlhttp = new XMLHttpRequest();
+                  xml_http = new XMLHttpRequest();
               } else {
-                  // code for IE6, IE5
-                  xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                  xml_http = new ActiveXObject("Microsoft.XMLHTTP");
               }
-              xmlhttp.onreadystatechange = function() {
-                  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                      document.getElementById("friend_search").innerHTML = xmlhttp.responseText;
+              xml_http.onreadystatechange = function() {
+                  if (xml_http.readyState == 4 && xml_http.status == 200) {
+                      document.getElementById("friend_search").innerHTML = xml_http.responseText;
                   }
               };
-              xmlhttp.open("GET","friend_search.php?q="+str,true);
-              xmlhttp.send();
+              xml_http.open("GET","friend_search.php?friend_input="+str,true);
+              xml_http.send();
           }
       }
     </script>
   </head>
   <body style="min-width:600px; width: auto !important;">
     <?php echo "Welcome : " . $_SESSION['username'] . "<br>"; ?>
-    <form style="max-width: 300px; margin-left: 50%; margin-right: 50%; margin:auto;">
+    <form id="messenger_search">
     <input type="text" size="20" onkeyup="display_friend(this.value)">
     <div id="friend_search"></div>
     </form>
-    <button onclick="window.location.href='./logout.php'" type="button" class="btn btn-default" style="margin-left: 2px !important; padding: 12px 46px !important;">Log Out</button>
+    <button id="logout_button" onclick="window.location.href='./logout.php'" type="button" class="btn btn-default">Log Out</button>
   </body>
 </html>
