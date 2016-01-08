@@ -17,34 +17,29 @@
     <title>Messenger</title>
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/messenger.css" type="text/css" rel ="stylesheet">
-    <script>
-      function display_friend(str) {
-          if (str == "") {
-              document.getElementById("friend_search").innerHTML = "";
-              return;
-          } else {
-              if (window.XMLHttpRequest) {
-                  xml_http = new XMLHttpRequest();
-              } else {
-                  xml_http = new ActiveXObject("Microsoft.XMLHTTP");
-              }
-              xml_http.onreadystatechange = function() {
-                  if (xml_http.readyState == 4 && xml_http.status == 200) {
-                      document.getElementById("friend_search").innerHTML = xml_http.responseText;
-                  }
-              };
-              xml_http.open("GET","friend_search.php?friend_input="+str,true);
-              xml_http.send();
-          }
-      }
-    </script>
+    <script src="../node_modules/angular/angular.js"></script>
+    <!--<scripts src="../js/messenger.js"></script>-->
   </head>
   <body>
     <?php echo "Welcome : " . $_SESSION['username'] . "<br>"; ?>
     <form id="messenger_search">
-    <input type="text" size="20" onkeyup="display_friend(this.value)">
-    <div id="friend_search"></div>
-    </form>
-    <button id="logout_button" onclick="window.location.href='./logout.php'" type="button" class="btn btn-default">Log Out</button>
+    <input type="text" size="20">
+     <div ng-app="myApp" ng-controller="customersCtrl">
+<ul>
+  <li ng-repeat="x in names">
+    {{ x.Name + ', ' + x.Country }}
+  </li>
+</ul>
+
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+    $http.get("http://www.w3schools.com/angular/customers.php")
+    .then(function(response) {$scope.names = response.data.records;
+      console.log('scope names: %o', $scope.names);});
+});
+</script> 
   </body>
 </html>
