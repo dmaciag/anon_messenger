@@ -1,15 +1,24 @@
 <?php
 
+// development environments
+
+function devEnv(){
+	require 'config.php';
+	return  $mac ? '' : '/anon_messenger';
+}
 function redirect_signin(){
-	return header("Location: http://localhost/app/signin.php");
+	$app_name = devEnv();
+	return header("Location: http://localhost$app_name/app/signin.php");
 }
 
 function redirect_messenger(){
-	return header("Location: http://localhost/app/messenger.php");
+	$app_name = devEnv();
+	return header("Location: http://localhost$app_name/app/messenger.php");
 }
 
 function redirect_register(){
-	return header("Location: http://localhost/app/register.php");
+	$app_name = devEnv();
+	return header("Location: http://localhost$app_name/app/register.php");
 }
 
 function strip_data( $data_to_be_stripped ){
