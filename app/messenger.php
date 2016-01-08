@@ -15,7 +15,8 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <title>Messenger</title>
-    <link href="./../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/messenger.css" rel ="alternate stylesheet">
     <script>
       function display_friend(str) {
           if (str == "") {
@@ -40,9 +41,9 @@
       }
     </script>
   </head>
-  <body>
+  <body style="min-width:600px; width: auto !important;">
     <?php echo "Welcome : " . $_SESSION['username'] . "<br>"; ?>
-    <form>
+    <form style="max-width: 300px; margin-left: 50%; margin-right: 50%; margin:auto;">
     <input type="text" size="20" onkeyup="display_friend(this.value)">
     <div id="friend_search"></div>
     </form>

@@ -16,9 +16,7 @@ if( !$connect ) die('Connection to mysql failed, error : ' . mysql_error());
 if( !mysql_select_db($db_db) ) die('Cannot connect to db : $db_db, ' . mysql_error());
 
 $q = $_GET['q'];
-echo $q . "<br>";
-for($i =0; $i < sizeof($q); $i++){
-	echo $q . "<br>";
+for($i = 0; $i < strlen($q); $i++){
 	$regexp_user .= "[" . $q[$i] . "]"; 
 }
 $registered_users_sql = "SELECT username FROM registered_users WHERE username REGEXP '^$regexp_user.*$'";
