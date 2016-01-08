@@ -1,0 +1,14 @@
+#form_check_password{
+	max-width: 300px; 
+	margin-left: 50%; 
+	margin-right: 50%; 
+	margin:auto;
+}
+
+#username{
+	margin-bottom: 4px;
+}
+
+#email{
+	margin-bottom: 4px;
+}

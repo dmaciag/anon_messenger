@@ -1,0 +1,20 @@
+#signin_form{
+	max-width: 300px; 
+	margin-left: 50%;
+	margin-right: 50%; 
+	margin: auto;
+}
+
+#inputUsername{
+	margin-bottom: 4px;
+}
+
+#signin_button{
+	max-width: 148px; 
+	display: inline-block;
+}
+
+#register_button{
+	margin-left: 1px; 
+	padding: 12px 46px;
+}
