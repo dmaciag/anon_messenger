@@ -15,37 +15,31 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <title>Messenger</title>
-    <link href="./../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script>
-      function display_friend(str) {
-          if (str == "") {
-              document.getElementById("friend_search").innerHTML = "";
-              return;
-          } else {
-              if (window.XMLHttpRequest) {
-                  // code for IE7+, Firefox, Chrome, Opera, Safari
-                  xmlhttp = new XMLHttpRequest();
-              } else {
-                  // code for IE6, IE5
-                  xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-              }
-              xmlhttp.onreadystatechange = function() {
-                  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                      document.getElementById("friend_search").innerHTML = xmlhttp.responseText;
-                  }
-              };
-              xmlhttp.open("GET","friend_search.php?q="+str,true);
-              xmlhttp.send();
-          }
-      }
-    </script>
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/messenger.css" type="text/css" rel ="stylesheet">
+    <script src="../node_modules/angular/angular.js"></script>
+    <!--<scripts src="../js/messenger.js"></script>-->
   </head>
   <body>
     <?php echo "Welcome : " . $_SESSION['username'] . "<br>"; ?>
-    <form>
-    <input type="text" size="20" onkeyup="display_friend(this.value)">
-    <div id="friend_search"></div>
-    </form>
-    <button onclick="window.location.href='./logout.php'" type="button" class="btn btn-default" style="margin-left: 2px !important; padding: 12px 46px !important;">Log Out</button>
+    <form id="messenger_search">
+    <input type="text" size="20">
+     <div ng-app="myApp" ng-controller="customersCtrl">
+<ul>
+  <li ng-repeat="x in names">
+    {{ x.Name + ', ' + x.Country }}
+  </li>
+</ul>
+
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+    $http.get("http://www.w3schools.com/angular/customers.php")
+    .then(function(response) {$scope.names = response.data.records;
+      console.log('scope names: %o', $scope.names);});
+});
+</script> 
   </body>
 </html>
