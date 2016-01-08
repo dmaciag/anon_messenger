@@ -39,7 +39,7 @@
       }
     </script>
   </head>
-  <body style="min-width:600px; width: auto !important;">
+  <body>
     <?php echo "Welcome : " . $_SESSION['username'] . "<br>"; ?>
     <form id="messenger_search">
     <input type="text" size="20" onkeyup="display_friend(this.value)">
