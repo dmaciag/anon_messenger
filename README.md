@@ -1,1 +1,1 @@
-This is a financial project that can manage income, expenses, and overal financial stability of a user or household.
+This is a messenger app that doesn't track any personal information.
