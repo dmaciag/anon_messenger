@@ -17,29 +17,26 @@
     <title>Messenger</title>
     <link href="./../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script>
-      function display_friend( entry ){
-        if( entry.length == 0 ){
-          document.getElementById("friend_search").innerHTML="";
-          document.getElementById("friend_search").style.border="0px";
-          return;
-        }
-        if( window.XMLHttpRequest ){
-          xml_http = new XMLHttpRequest();
-        }
-        else{
-          // not supporting sub ie7
-          return;
-        }
-
-        xml_http.onreadystatechange = function(){
-          if( xml_http.readyState == 4 && xml_http.status == 200 ){
-            document.getElementById().innerHTML = xml_http.responseText;
-            document.getElementById().style.border= "1px solid #0f0";
+      function display_friend(str) {
+          if (str == "") {
+              document.getElementById("friend_search").innerHTML = "";
+              return;
+          } else {
+              if (window.XMLHttpRequest) {
+                  // code for IE7+, Firefox, Chrome, Opera, Safari
+                  xmlhttp = new XMLHttpRequest();
+              } else {
+                  // code for IE6, IE5
+                  xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+              }
+              xmlhttp.onreadystatechange = function() {
+                  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                      document.getElementById("friend_search").innerHTML = xmlhttp.responseText;
+                  }
+              };
+              xmlhttp.open("GET","friend_search.php?q="+str,true);
+              xmlhttp.send();
           }
-        }
-
-        xml_http.open("GET","friend_search.php?q="+entry, true);
-        xml_http.send();
       }
     </script>
   </head>
