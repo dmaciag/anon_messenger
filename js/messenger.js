@@ -3,7 +3,7 @@ var app = angular.module('myApp', []);
 app.controller('customersCtrl', function($scope, $http) {
     $http.get("./friend_search.php")
     .then(function(response) {
-        $scope.names = response.data.users;
+        $scope.users = response.data.users;
       });
 });
 

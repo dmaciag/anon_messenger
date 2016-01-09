@@ -25,8 +25,8 @@
     <input type="text" size="20" ng-model="search_query">
      <div ng-controller="customersCtrl">
       <ul>
-        <li ng-repeat="x in names | user_search_filter:search_query">
-          {{ x.username }}
+        <li ng-repeat="user in users | user_search_filter:search_query">
+          {{ user.username }}
         </li>
       </ul>
     </div>
