@@ -20,15 +20,17 @@
     <script src="../node_modules/angular/angular.js"></script>
   </head>
   <body>
+  <?php echo 'user: ' . $_SESSION['username'] . "<br>"; ?>
     <form ng-submit="submit_user()" ng-controller="customersCtrl">
       <div id="search_user_container" class="dropdown-container">
         <input type="text" class="form-control" size="20" ng-model="search_query" placeholder="Request a friend" />
-            <li ng-repeat="user in users | user_search_filter:search_query">
+            <div id="search_results" ng-repeat="user in users | user_search_filter:search_query">
               {{ user.username }}
-            </li>
+            </div>
         Requested friends : {{requested_friends}}
       </div>
     </form>
+    <button id="settings_button" onclick="window.location.href='./settings.php'" class="btn btn-default">Settings</button>
     <button id="logout_button" onclick="window.location.href='./logout.php'" class="btn btn-default">Logout</button>
     <script src="../js/messenger.js"> </script>
   </body>
