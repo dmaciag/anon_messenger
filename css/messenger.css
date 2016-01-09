@@ -15,6 +15,7 @@
 #search_user_container{
 	position: relative;
 	left: 15%;
+	top: 10px;
 }
 
 body {
