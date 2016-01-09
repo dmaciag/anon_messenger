@@ -1,5 +1,6 @@
 <?php
   session_start();
+  error_reporting(E_ERROR | E_PARSE);
   require '../functions.php';
   if($_SESSION['is_logged_in']){
     if( !redirect_messenger() ) die('failed to redirect to messenger from login');
