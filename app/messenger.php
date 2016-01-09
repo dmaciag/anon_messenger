@@ -6,7 +6,7 @@
   }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,26 +20,17 @@
     <script src="../node_modules/angular/angular.js"></script>
     <!--<scripts src="../js/messenger.js"></script>-->
   </head>
-  <body>
+  <body ng-app="myApp">
     <?php echo "Welcome : " . $_SESSION['username'] . "<br>"; ?>
-    <form id="messenger_search">
-    <input type="text" size="20">
-     <div ng-app="myApp" ng-controller="customersCtrl">
-<ul>
-  <li ng-repeat="x in names">
-    {{ x.Name + ', ' + x.Country }}
-  </li>
-</ul>
-
-</div>
-
-<script>
-var app = angular.module('myApp', []);
-app.controller('customersCtrl', function($scope, $http) {
-    $http.get("http://www.w3schools.com/angular/customers.php")
-    .then(function(response) {$scope.names = response.data.records;
-      console.log('scope names: %o', $scope.names);});
-});
-</script> 
+    <input type="text" size="20" ng-model="search_query">
+     <div ng-controller="customersCtrl">
+      <ul>
+        <li ng-repeat="x in names | user_search_filter:search_query">
+          {{ x.username }}
+        </li>
+      </ul>
+    </div>
+    <button id="logout_button" onclick="window.location.href='./logout.php'" class="btn btn-lg btn-primary btn-block">Logout</button>
+    <script src="../js/messenger.js"> </script>
   </body>
 </html>
