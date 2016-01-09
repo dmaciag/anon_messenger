@@ -1,10 +1,21 @@
 var app = angular.module('messenger', []);
 
 app.controller('customersCtrl', function($scope, $http) {
+
     $http.get("./friend_search.php")
     .then(function(response) {
         $scope.users = response.data.users;
       });
+
+	$scope.requested_friends = [];
+
+	$scope.submit_user = function() {
+	    if ($scope.search_query) {
+			$scope.requested_friends.push(this.search_query);
+			$scope.search_query = '';
+	    }
+	};
+
 });
 
 app.filter('user_search_filter', function(){
@@ -19,7 +30,6 @@ app.filter('user_search_filter', function(){
 				search_result.push(user);
 			}
 		});
-
 		return search_result;
 	}
 });
