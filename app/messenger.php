@@ -6,7 +6,7 @@
   }
 ?>
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp">
+<html lang="en" ng-app="messenger">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,16 +20,22 @@
     <script src="../node_modules/angular/angular.js"></script>
     <!--<scripts src="../js/messenger.js"></script>-->
   </head>
-  <body ng-app="myApp">
+  <body ng-app="messenger">
     <?php echo "Welcome : " . $_SESSION['username'] . "<br>"; ?>
-    <input type="text" size="20" ng-model="search_query">
-     <div ng-controller="customersCtrl">
-      <ul>
-        <li ng-repeat="user in users | user_search_filter:search_query">
-          {{ user.username }}
-        </li>
-      </ul>
+    <div custom-select id="search_user_container" class="dropdown-container">
+      <input type="text" size="20" ng-model="search_query">
+       <div class="dropdown-list" ng-controller="customersCtrl">
+        <ul>
+          <li ng-repeat="user in users | user_search_filter:search_query">
+            {{ user.username }}
+          </li>
+        </ul>
+      </div>
     </div>
+    <!-- Dropdown -->
+
+
+    <!-- End Dropdown -->
     <button id="logout_button" onclick="window.location.href='./logout.php'" class="btn btn-lg btn-primary btn-block">Logout</button>
     <script src="../js/messenger.js"> </script>
   </body>

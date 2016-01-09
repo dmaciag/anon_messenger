@@ -1,6 +1,12 @@
 <?php 
 
+session_start();
 require '../config.php';
+require '../functions.php';
+
+if( !$_SESSION['is_logged_in'] ){
+	if( !redirect_signin() ) die('Something went wrong on the messenger page.');
+}
 
 $connect = mysql_connect($db_hostname, $db_username, $db_password);
 
@@ -16,6 +22,7 @@ while( $user = mysql_fetch_assoc($registered_users) ){
     $json_user_response[] = $json_user;
 
 }
+
 $search_arr = array("users" => $json_user_response);
 
 mysql_close();

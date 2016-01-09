@@ -1,6 +1,8 @@
 #logout_button{
-	margin-left: 2px; 
-	padding: 12px 46px;
+	max-width: 100px;
+	position: absolute;
+	top: 3px;
+	right: 3px;
 }
 
 #messenger_search{
@@ -8,6 +10,11 @@
 	margin-left: 50%; 
 	margin-right: 50%; 
 	margin: auto;
+}
+
+#search_user_container{
+	position: relative;
+	left: 15%;
 }
 
 body {

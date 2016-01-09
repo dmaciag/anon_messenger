@@ -1,4 +1,4 @@
-var app = angular.module('myApp', []);
+var app = angular.module('messenger', []);
 
 app.controller('customersCtrl', function($scope, $http) {
     $http.get("./friend_search.php")
