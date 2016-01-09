@@ -14,8 +14,12 @@
 
 #search_user_container{
 	position: relative;
-	left: 15%;
+	left: 1%;
 	top: 10px;
+}
+
+.form-control{
+	max-width: 200px;
 }
 
 body {

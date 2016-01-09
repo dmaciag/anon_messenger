@@ -32,8 +32,8 @@
             <input type="checkbox" value="remember-me"> Remember me?
           </label>
         </div>
-        <button id="signin_button" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <button id="register_button" onclick="window.location.href='./register.php'" type="button" class="btn btn-default">Register</button>
+        <button id="signin_button" class="btn btn-primary" type="submit">Sign in</button>
+        <button id="register_button" onclick="window.location.href='./register.php'" type="button" class="btn btn-block">Register</button>
       </form>
     </div>
   </body>

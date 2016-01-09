@@ -39,7 +39,7 @@
         <input type="password" name="password_first" id="inputPassword_first" class="form-control" placeholder="Password" required>
         <label for="inputPassword_second" class="sr-only">Confirm Password</label>
         <input type="password" name="password_second" id="inputPassword_second" class="form-control" placeholder="Confirm Password" required>
-        <button id="register_button" class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+        <button id="register_button" class="btn btn-primary btn-block" type="submit">Register</button>
       </form>   
     </div>
     <script src="../js/register.js"></script>

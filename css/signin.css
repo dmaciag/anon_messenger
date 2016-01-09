@@ -11,10 +11,12 @@
 
 #signin_button{
 	max-width: 148px; 
+	width: 148px;
 	display: inline-block;
 }
 
 #register_button{
-	margin-left: 1px; 
-	padding: 12px 46px;
+	width: 148px;
+	max-width: 148px; 
+	display: inline-block;
 }

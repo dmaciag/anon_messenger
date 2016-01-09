@@ -22,16 +22,14 @@
   <body>
     <form ng-submit="submit_user()" ng-controller="customersCtrl">
       <div id="search_user_container" class="dropdown-container">
-        Add friend: <br>
-        <input type="text" size="20" ng-model="search_query" />
-        <input type="submit" id="submit" value="Submit" />
+        <input type="text" class="form-control" size="20" ng-model="search_query" placeholder="Request a friend" />
             <li ng-repeat="user in users | user_search_filter:search_query">
               {{ user.username }}
             </li>
         Requested friends : {{requested_friends}}
       </div>
     </form>
-    <button id="logout_button" onclick="window.location.href='./logout.php'" class="btn btn-lg btn-primary btn-block">Logout</button>
+    <button id="logout_button" onclick="window.location.href='./logout.php'" class="btn btn-default">Logout</button>
     <script src="../js/messenger.js"> </script>
   </body>
 </html>
