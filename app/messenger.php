@@ -18,24 +18,19 @@
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/messenger.css" type="text/css" rel ="stylesheet">
     <script src="../node_modules/angular/angular.js"></script>
-    <!--<scripts src="../js/messenger.js"></script>-->
   </head>
-  <body ng-app="messenger">
-    <?php echo "Welcome : " . $_SESSION['username'] . "<br>"; ?>
-    <div custom-select id="search_user_container" class="dropdown-container">
-      <input type="text" size="20" ng-model="search_query">
-       <div class="dropdown-list" ng-controller="customersCtrl">
-        <ul>
-          <li ng-repeat="user in users | user_search_filter:search_query">
-            {{ user.username }}
-          </li>
-        </ul>
+  <body>
+    <form ng-submit="submit_user()" ng-controller="customersCtrl">
+      <div id="search_user_container" class="dropdown-container">
+        Add friend: <br>
+        <input type="text" size="20" ng-model="search_query" />
+        <input type="submit" id="submit" value="Submit" />
+            <li ng-repeat="user in users | user_search_filter:search_query">
+              {{ user.username }}
+            </li>
+        Requested friends : {{requested_friends}}
       </div>
-    </div>
-    <!-- Dropdown -->
-
-
-    <!-- End Dropdown -->
+    </form>
     <button id="logout_button" onclick="window.location.href='./logout.php'" class="btn btn-lg btn-primary btn-block">Logout</button>
     <script src="../js/messenger.js"> </script>
   </body>
