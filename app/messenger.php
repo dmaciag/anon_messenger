@@ -20,7 +20,6 @@
     <script src="../node_modules/angular/angular.js"></script>
   </head>
   <body>
-  <?php echo 'user: ' . $_SESSION['username'] . "<br>"; ?>
     <form ng-submit="submit_user()" ng-controller="customersCtrl">
       <div id="search_user_container" class="dropdown-container">
         <input type="text" class="form-control" size="20" ng-model="search_query" placeholder="Request a friend" />
