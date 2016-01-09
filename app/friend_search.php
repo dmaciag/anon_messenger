@@ -1,6 +1,8 @@
 <?php 
 
 session_start();
+error_reporting(E_ERROR | E_PARSE);
+
 require '../config.php';
 require '../functions.php';
 
@@ -19,7 +21,7 @@ $registered_users = mysql_query( $registered_users_sql );
 
 while( $user = mysql_fetch_assoc($registered_users) ){
     $json_user['username'] = $user["username"];
-    $json_user_response[] = $json_user;
+    $json_user_response[]  = $json_user;
 
 }
 
