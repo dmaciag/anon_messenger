@@ -38,7 +38,6 @@ if( mysql_num_rows($registered_users) == 1 ){
 	else{
 		echo "Invalid password !";
 	}
-
 }
 else{
 	echo "User is not registered. " .'<br>';
