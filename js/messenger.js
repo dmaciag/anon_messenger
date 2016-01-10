@@ -1,6 +1,6 @@
 var app = angular.module('messenger', []);
 
-app.controller('customersCtrl', function($scope, $http) {
+app.controller('usersCtrl', function($scope, $http) {
 
     $http.get("./friend_search.php")
     .then(function(response) {
@@ -15,7 +15,6 @@ app.controller('customersCtrl', function($scope, $http) {
 			$scope.search_query = '';
 	    }
 	};
-
 });
 
 app.filter('user_search_filter', function(){
@@ -32,4 +31,10 @@ app.filter('user_search_filter', function(){
 		});
 		return search_result;
 	}
+});
+
+app.controller('friendsCtrl', function($scope, $http){
+	$http.get('./current_friends.php').then(function(response){ 
+		$scope.friends = response.data.friends;
+	});
 });

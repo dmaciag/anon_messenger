@@ -20,7 +20,7 @@
     <script src="../node_modules/angular/angular.js"></script>
   </head>
   <body>
-    <form ng-submit="submit_user()" ng-controller="customersCtrl">
+    <form ng-submit="submit_user()" ng-controller="usersCtrl">
       <div id="search_user_container" class="dropdown-container">
         <input type="text" class="form-control" size="20" ng-model="search_query" placeholder="Request a friend" />
             <div id="search_results" ng-repeat="user in users | user_search_filter:search_query">
@@ -29,6 +29,20 @@
         Requested friends : {{requested_friends}}
       </div>
     </form>
+    <div ng-controller="friendsCtrl">
+      <table id="friends_table" class="table table-bordered table-hover table-condensed">
+        <thead>
+          <tr>
+            <th>Your Friends</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="friend in friends | orderBy : 'name' ">
+            <td>{{friend.name}}</td>
+          </tr>
+        </tbody>
+      </table>
+    <div>
     <button id="settings_button" onclick="window.location.href='./settings.php'" class="btn btn-default">Settings</button>
     <button id="logout_button" onclick="window.location.href='./logout.php'" class="btn btn-default">Logout</button>
     <script src="../js/messenger.js"> </script>

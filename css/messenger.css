@@ -37,3 +37,10 @@ body {
 	min-width: 600px; 
 	width: auto !important;
 }
+
+#friends_table{
+	max-width: 153px;
+	position: absolute;
+	right: 6px;
+	top: 50px;
+}
