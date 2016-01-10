@@ -21,6 +21,8 @@ app.controller('usersCtrl', function($scope, $http) {
 
 	$scope.submit_user = function() {
 	    if ($scope.search_query) {
+	    	$scope.is_alert = true;
+	    	console.log('searching!');
 			$scope.requested_friend = this.search_query;
 
 			$http({
@@ -29,10 +31,12 @@ app.controller('usersCtrl', function($scope, $http) {
 				params: { 'search_query' : this.search_query }
 			}).
 			success(function(response){
-				$scope.users = response.users;
+				console.log(response);
+				console.log(response.users);
+				$scope.message = response;
 			}).
 			error(function(response){
-				$scope.users = response || 'Failed to grab users';
+				$scope.users = response || 'Failed to send invite';
 			});
 
 			$scope.search_query = '';

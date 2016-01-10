@@ -30,6 +30,8 @@
               </tr>
             </thead>
             <tbody>
+              <tr ng-show="is_alert"><td>{{message}}</td>
+              </tr>
               <tr ng-repeat="user in users | user_search_filter:search_query">
                 <td ng-click="count = count +1" ng-init="count=0">{{user.username}} , {{count}}</td>
               </tr>

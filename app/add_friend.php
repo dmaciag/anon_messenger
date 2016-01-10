@@ -51,7 +51,7 @@ else{
 		$check_friendships = mysql_query($check_friendships_sql);
 
 		if( mysql_num_rows($check_friendships) >= 1 ){
-			var_dump('friendship already exists');
+			echo '';
 		}
 		else{
 			$insert_friendship_sql = "INSERT INTO friend_combinations (requestor_name, receiver_name, are_friends)
@@ -67,10 +67,10 @@ else{
 		}
 	}
 	else if(mysql_num_rows($find_friend) == 0){
-		var_dump('friend not found');
+		echo 'friend not found';
 	}
 	else{
-		var_dump('Should not have found more than one of the same friend');
+		echo 'Should not have found more than one of the same friend';
 	}
 
 	mysql_close();
