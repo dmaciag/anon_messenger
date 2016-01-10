@@ -22,11 +22,22 @@
   <body>
     <form ng-submit="submit_user()" ng-controller="usersCtrl">
       <div id="search_user_container" class="dropdown-container">
-        <input type="text" class="form-control" size="20" ng-model="search_query" placeholder="Request a friend" />
-            <div id="search_results" ng-repeat="user in users | user_search_filter:search_query">
-              {{ user.username }}
-            </div>
-        Requested friends : {{requested_friends}}
+        <div id="search_results">
+          <table id="users_table" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th><input id="users_table_input" type="text" ng-model="search_query" ng-keyup="search_keypress($event)" placeholder="Request a friend"/></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="user in users | user_search_filter:search_query">
+                <td>{{user.username}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        Search Query: {{search_query}} <br>
+        Requested friend : {{requested_friends}}
       </div>
     </form>
     <div ng-controller="friendsCtrl">
@@ -45,6 +56,6 @@
     <div>
     <button id="settings_button" onclick="window.location.href='./settings.php'" class="btn btn-default">Settings</button>
     <button id="logout_button" onclick="window.location.href='./logout.php'" class="btn btn-default">Logout</button>
-    <script src="../js/messenger.js"> </script>
+    <script src="../js/messenger.js"></script>
   </body>
 </html>

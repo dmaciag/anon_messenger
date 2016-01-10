@@ -1,22 +1,27 @@
 var app = angular.module('messenger', []);
 
 app.controller('usersCtrl', function($scope, $http) {
-	$http({
-		method: 'GET',
-		url: './friend_search.php'
-	}).
-	success(function(response){
-		$scope.users = response.users;
-	}).
-	error(function(response){
-		$scope.users = response || 'Failed to grab users';
-	});
+
+	$scope.search_keypress = function(keyPress){
+		$http({
+			method: 'GET',
+			url: './friend_search.php',
+			params: { 'search_query' : $scope.search_query }
+		}).
+		success(function(response){
+			$scope.users = response.users;
+		}).
+		error(function(response){
+			$scope.users = response || 'Failed to grab users';
+		});
+
+	};
 
 	$scope.requested_friends = '';
 
 	$scope.submit_user = function() {
 	    if ($scope.search_query) {
-			$scope.requested_friends = (this.search_query);
+			$scope.requested_friends = this.search_query;
 			$scope.search_query = '';
 	    }
 	};
@@ -50,3 +55,4 @@ app.controller('friendsCtrl', function($scope, $http){
 		$scope.users = response || 'Failed to grab friends';
 	});
 });
+

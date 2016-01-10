@@ -20,7 +20,6 @@
 
 #search_user_container{
 	position: relative;
-	left: 1%;
 	top: 10px;
 }
 
@@ -43,4 +42,15 @@ body {
 	position: absolute;
 	right: 6px;
 	top: 50px;
+}
+
+#users_table{
+	position: relative;
+	max-width: 153px;
+}
+
+#users_table_input{
+	border: none;
+	border-color: transparent;
+	font-weight: normal;
 }
