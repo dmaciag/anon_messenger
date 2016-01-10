@@ -2,7 +2,7 @@ var app = angular.module('messenger', []);
 
 app.controller('usersCtrl', function($scope, $http) {
 
-	$scope.search_keypress = function(keyPress){
+	$scope.search_keyup = function(keyPress){
 		$http({
 			method: 'GET',
 			url: './friend_search.php',
@@ -17,11 +17,24 @@ app.controller('usersCtrl', function($scope, $http) {
 
 	};
 
-	$scope.requested_friends = '';
+	$scope.requested_friend = '';
 
 	$scope.submit_user = function() {
 	    if ($scope.search_query) {
-			$scope.requested_friends = this.search_query;
+			$scope.requested_friend = this.search_query;
+
+			$http({
+				method: 'GET',
+				url: './add_friend.php',
+				params: { 'search_query' : this.search_query }
+			}).
+			success(function(response){
+				$scope.users = response.users;
+			}).
+			error(function(response){
+				$scope.users = response || 'Failed to grab users';
+			});
+
 			$scope.search_query = '';
 	    }
 	};

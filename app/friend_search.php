@@ -7,7 +7,7 @@ require '../config.php';
 require '../functions.php';
 
 if( !$_SESSION['is_logged_in'] ){
-	if( !redirect_signin() ) die('Something went wrong on the messenger page.');
+	if( !redirect_signin() ) die('Something went wrong on the friend_search page.');
 }
 
 $search_query = $_GET['search_query'];

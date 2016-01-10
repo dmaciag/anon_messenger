@@ -26,7 +26,7 @@
     <div class="container">
       <form id="form_check_password" class="form-signin" action="./validate_register.php" method="post">
         <h2 class="form-signin-heading" >Enter information</h2>
-        <?php 
+        <?php  //need to replace with angular
               if( $_SESSION['user_already_exists_in_db'] ) {
                   echo "<p>   User already exists </p>"; 
               }

@@ -26,18 +26,18 @@
           <table id="users_table" class="table table-bordered table-hover">
             <thead>
               <tr>
-                <th><input id="users_table_input" type="text" ng-model="search_query" ng-keyup="search_keypress($event)" placeholder="Request a friend"/></th>
+                <th><input id="users_table_input" type="text" ng-model="search_query" ng-keyup="search_keyup($event)" placeholder="Request a friend"/></th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="user in users | user_search_filter:search_query">
-                <td>{{user.username}}</td>
+                <td ng-click="count = count +1" ng-init="count=0">{{user.username}} , {{count}}</td>
               </tr>
             </tbody>
           </table>
         </div>
         Search Query: {{search_query}} <br>
-        Requested friend : {{requested_friends}}
+        Requested friend : {{requested_friend}}
       </div>
     </form>
     <div ng-controller="friendsCtrl">

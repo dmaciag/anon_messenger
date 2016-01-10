@@ -12,10 +12,10 @@ if( !$connect ) die('Connection to mysql failed, error : ' . mysql_error());
 
 if( !mysql_select_db($db_db) ) die('Cannot connect to db : $db_db, ' . mysql_error());
 
-$username = $_POST[username];
-$email    = $_POST[email];
-$password = $_POST[password_first];
-$conf_pas = $_POST[password_second];
+$username = $_POST['username'];
+$email    = $_POST['email'];
+$password = $_POST['password_first'];
+$conf_pas = $_POST['password_second'];
 
 $username = strip_data($username);
 $email 	  = strip_data($email);
