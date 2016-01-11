@@ -11,9 +11,11 @@ if( !$_SESSION['is_logged_in'] ){
 
 $friend_username = strip_data($_GET['search_query']);
 $current_username = strip_data($_SESSION['username']);
-
-if(empty($friend_username)){ 
-	echo '';
+if( $friend_username === $current_username){
+	echo 'cannot add yourself';
+}
+else if(empty($friend_username)){ 
+	echo 'empty';
 }
 else{
 
@@ -22,25 +24,7 @@ else{
 	if( !$connect ) die('Connection to mysql failed, error : ' . mysql_error());
 
 	if( !mysql_select_db($db_db) ) die('Cannot connect to db : $db_db, ' . mysql_error());
-	/*
-	$username = strip_data($_SESSION['username']);
 
-	$friendships = "SELECT * FROM friend_combinations 
-	WHERE receiver_name = '$username' OR requestor_name ='$username' AND are_friends = true";
-	$friendship = mysql_query( $friendships );
-
-	while( $friend = mysql_fetch_assoc($friendship) ){
-	    if( $friend['receiver_name'] === $username) {
-	    	$json_friend['name'] = $friend['requestor_name'];
-	    	$json_friend_response[] = $json_friend;
-	    }
-	    else if($friend['requestor_name'] === $username){
-	    	$json_friend['name'] = $friend['receiver_name'];
-	    	$json_friend_response[] = $json_friend;
-	    }
-	}
-	$response_arr = array('friends' => $json_friend_response);
-	*/
 	$find_friend_sql = "SELECT username FROM registered_users WHERE username = '$friend_username'";
 	$find_friend = mysql_query($find_friend_sql);
 
@@ -51,7 +35,7 @@ else{
 		$check_friendships = mysql_query($check_friendships_sql);
 
 		if( mysql_num_rows($check_friendships) >= 1 ){
-			echo '';
+			echo 'already has friendship';
 		}
 		else{
 			$insert_friendship_sql = "INSERT INTO friend_combinations (requestor_name, receiver_name, are_friends)
@@ -64,10 +48,11 @@ else{
 				$error_mesage .= 'Desired query: ' . $insert_friendship_sql;
 				die( $error_mesage );
 			}
+			echo "sent friend request to $friend_username";
 		}
 	}
 	else if(mysql_num_rows($find_friend) == 0){
-		echo 'friend not found';
+		echo 'user not found';
 	}
 	else{
 		echo 'Should not have found more than one of the same friend';

@@ -21,7 +21,6 @@ app.controller('usersCtrl', function($scope, $http) {
 
 	$scope.submit_user = function() {
 	    if ($scope.search_query) {
-	    	$scope.is_alert = true;
 	    	console.log('searching!');
 			$scope.requested_friend = this.search_query;
 
@@ -32,7 +31,6 @@ app.controller('usersCtrl', function($scope, $http) {
 			}).
 			success(function(response){
 				console.log(response);
-				console.log(response.users);
 				$scope.message = response;
 			}).
 			error(function(response){
@@ -41,6 +39,7 @@ app.controller('usersCtrl', function($scope, $http) {
 
 			$scope.search_query = '';
 	    }
+	    $scope.search_query = '';
 	};
 });
 
