@@ -1,8 +1,10 @@
 var app = angular.module('messenger', []);
 
-app.controller('usersCtrl', function($scope, $http) {
+app.controller('usersCtrl', function($scope, $http, $timeout) {
 
 	$scope.search_keyup = function(keyPress){
+		
+		console.log('searching!');
 		$http({
 			method: 'GET',
 			url: './friend_search.php',
@@ -18,7 +20,6 @@ app.controller('usersCtrl', function($scope, $http) {
 	};
 
 	$scope.requested_friend = '';
-
 	$scope.submit_user = function() {
 	    if ($scope.search_query) {
 	    	console.log('searching!');
@@ -36,10 +37,20 @@ app.controller('usersCtrl', function($scope, $http) {
 			error(function(response){
 				$scope.users = response || 'Failed to send invite';
 			});
-
-			$scope.search_query = '';
 	    }
 	    $scope.search_query = '';
+
+	    $scope.startLoad = false;
+		console.log('starting Load');
+		$timeout(function(){
+			console.log('hidden false');
+			$scope.hidden = false;
+		}, 30000);
+		$scope.startFade = true;
+		$timeout(function(){
+			console.log('hidden true');
+			$scope.hidden =true;
+		}, 30000);
 	};
 });
 

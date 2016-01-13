@@ -18,10 +18,11 @@
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/messenger.css" type="text/css" rel ="stylesheet">
     <script src="../node_modules/angular/angular.js"></script>
+    <script src="../js/jquery.js"></script>
   </head>
   <body>
     <form ng-submit="submit_user()" ng-controller="usersCtrl">
-      <div id="search_user_container" class="dropdown-container">
+      <div id="search_user_container">
         <div id="search_results">
           <table id="users_table" class="table table-bordered table-hover">
             <thead>
@@ -30,7 +31,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-show="message"><td>{{message}}</td>
+              <tr class="slide" ng-show="message">
+                <td>message: {{message}}</td>
               </tr>
               <tr ng-repeat="user in users | user_search_filter:search_query">
                 <td ng-click="count = count +1" ng-init="count=0">{{user.username}} , {{count}}</td>
@@ -38,7 +40,8 @@
             </tbody>
           </table>
         </div>
-        Search Query: {{search_query}} <br>
+        <div class="default" ng-hide="hidden" ng-class="{fade: startFade}">Search Query: {{search_query}}</div> 
+
         Requested friend : {{requested_friend}}
       </div>
     </form>
