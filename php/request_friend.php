@@ -25,21 +25,27 @@ else{
 
 	if( !mysql_select_db($db_db) ) die('Cannot connect to db : $db_db, ' . mysql_error());
 
-	$find_friend_sql = "SELECT username FROM registered_users WHERE username = '$friend_username'";
+	$find_friend_sql = "SELECT username 
+						FROM registered_users 
+						WHERE username = '$friend_username'";
 	$find_friend = mysql_query($find_friend_sql);
 
 	if(mysql_num_rows($find_friend) == 1) {
-		$check_friendships_sql = "SELECT requestor_name, receiver_name, are_friends FROM friend_combinations 
-		WHERE (requestor_name = '$current_username' AND receiver_name = '$friend_username') 
-		OR (receiver_name = '$current_username' AND requestor_name = '$friend_username')";
+		$check_friendships_sql = 	"SELECT requestor_name, receiver_name, are_friends 
+									 FROM 	friend_combinations 
+									 WHERE (requestor_name = '$current_username' 
+									 AND 	receiver_name  = '$friend_username') 
+									 OR    (receiver_name  = '$current_username' 
+									 AND 	requestor_name = '$friend_username')";
 		$check_friendships = mysql_query($check_friendships_sql);
 
 		if( mysql_num_rows($check_friendships) >= 1 ){
+			mysql_close();
 			echo 'already has friendship';
 		}
 		else{
-			$insert_friendship_sql = "INSERT INTO friend_combinations (requestor_name, receiver_name, are_friends)
-			VALUES ('$current_username', '$friend_username', false)";
+			$insert_friendship_sql =   "INSERT INTO friend_combinations (requestor_name, receiver_name, are_friends)
+										VALUES ('$current_username', '$friend_username', false)";
 
 			$inserted_friendship = mysql_query($insert_friendship_sql);
 
@@ -48,18 +54,18 @@ else{
 				$error_mesage .= 'Desired query: ' . $insert_friendship_sql;
 				die( $error_mesage );
 			}
+			mysql_close();
 			echo "sent friend request to $friend_username";
 		}
 	}
-	else if(mysql_num_rows($find_friend) == 0){
+	else if(mysql_num_rows($find_friend) === 0){
+		mysql_close();
 		echo 'user not found';
 	}
 	else{
+		mysql_close();
 		echo 'Should not have found more than one of the same friend';
 	}
-
-	mysql_close();
-
 }
 
 ?>

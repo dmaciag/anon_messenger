@@ -3,8 +3,6 @@ var app = angular.module('messenger', []);
 app.controller('usersCtrl', function($scope, $http, $timeout) {
 
 	$scope.search_keyup = function(keyPress){
-		
-		console.log('searching!');
 		$http({
 			method: 'GET',
 			url: './friend_search.php',
@@ -22,7 +20,6 @@ app.controller('usersCtrl', function($scope, $http, $timeout) {
 	$scope.requested_friend = '';
 	$scope.submit_user = function() {
 	    if ($scope.search_query) {
-	    	console.log('searching!');
 			$scope.requested_friend = this.search_query;
 
 			$http({
@@ -31,7 +28,6 @@ app.controller('usersCtrl', function($scope, $http, $timeout) {
 				params: { 'search_query' : this.search_query }
 			}).
 			success(function(response){
-				console.log(response);
 				$scope.message = response;
 			}).
 			error(function(response){
@@ -54,7 +50,6 @@ app.filter('user_search_filter', function(){
 				search_result.push(user);
 			}
 		});
-		console.log(search_result);
 		return search_result;
 	}
 });
@@ -68,7 +63,7 @@ app.controller('friendsCtrl', function($scope, $http){
 		$scope.friends = response.friends;
 	}).
 	error(function(response){
-		$scope.users = response || 'Failed to grab friends';
+		$scope.users = response || 'Failed to grab current friends';
 	});
 });
 
@@ -78,7 +73,6 @@ app.controller('friend_requestsCtrl', function($scope, $http){
 			url: './friend_requests.php',
 		}).
 		success(function(response){
-			console.log(response);
 			$scope.friend_requests = response;
 		}).
 		error(function(response){

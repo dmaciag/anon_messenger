@@ -35,18 +35,17 @@ if( mysql_num_rows( $find_friend_requests ) >= 1 ) {
 			$count_of_friends++;
 		}
 	}
+	mysql_close();
 	if( $count_of_friends !== 0) echo json_encode($friends);
 	else echo json_encode(array(array('name' => 'No incoming requests')));
 }
 else if( mysql_num_rows( $find_friend_requests ) === 0 ){
+	mysql_close();
 	echo json_encode(array(array('name' => 'No pending requests')));
 }
 else{
+	mysql_close();
 	echo json_encode(array(array('name' => 'Should not get here error#10222')));
 }
-
-mysql_close();
-
-
 
 ?>
