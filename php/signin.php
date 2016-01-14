@@ -7,7 +7,7 @@
   }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="sign_in_app">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,13 +18,27 @@
     <title>Sign in</title>
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/signin.css" rel="stylesheet" type="text/css">
+    <script src="../node_modules/angular/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
   </head>
   <body>
     <div class="container">
-      <form id="signin_form" class="form-signin" action="./validate_signin.php" method="post">
+      <form
+          method="POST"
+          name="sign_in_form" 
+          id="signin_form" 
+          class="form-signin"
+          action="./validate_signin.php"
+          >
         <h2 class="form-signin-heading" >Please sign in</h2>
         <label for="inputUsername" class="sr-only">Username</label>
-        <input type="text" name="username" id="inputUsername" class="form-control"  placeholder="Username" required autofocus>
+        <input
+            type="text" 
+            name="username" 
+            id="inputUsername" 
+            class="form-control"  
+            placeholder="Username" 
+            required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <div class="checkbox" >
@@ -36,5 +50,6 @@
         <button id="register_button" onclick="window.location.href='./register.php'" type="button" class="btn btn-block">Register</button>
       </form>
     </div>
+    <script type="text/javascript" src="../js/signin.js"></script>>
   </body>
 </html>
