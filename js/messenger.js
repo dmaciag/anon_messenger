@@ -27,7 +27,7 @@ app.controller('usersCtrl', function($scope, $http, $timeout) {
 
 			$http({
 				method: 'GET',
-				url: './add_friend.php',
+				url: './request_friend.php',
 				params: { 'search_query' : this.search_query }
 			}).
 			success(function(response){
@@ -39,18 +39,6 @@ app.controller('usersCtrl', function($scope, $http, $timeout) {
 			});
 	    }
 	    $scope.search_query = '';
-
-	    $scope.startLoad = false;
-		console.log('starting Load');
-		$timeout(function(){
-			console.log('hidden false');
-			$scope.hidden = false;
-		}, 30000);
-		$scope.startFade = true;
-		$timeout(function(){
-			console.log('hidden true');
-			$scope.hidden =true;
-		}, 30000);
 	};
 });
 
@@ -66,6 +54,7 @@ app.filter('user_search_filter', function(){
 				search_result.push(user);
 			}
 		});
+		console.log(search_result);
 		return search_result;
 	}
 });
@@ -83,3 +72,16 @@ app.controller('friendsCtrl', function($scope, $http){
 	});
 });
 
+app.controller('friend_requestsCtrl', function($scope, $http){
+		$http({
+			method: 'POST',
+			url: './friend_requests.php',
+		}).
+		success(function(response){
+			console.log(response);
+			$scope.friend_requests = response;
+		}).
+		error(function(response){
+			$scope.friend_requests = response || 'Failed to grab friend_requests';
+		});
+});

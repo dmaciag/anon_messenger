@@ -41,26 +41,41 @@
           </table>
         </div>
         <div class="default" ng-hide="hidden" ng-class="{fade: startFade}">Search Query: {{search_query}}</div> 
-
         Requested friend : {{requested_friend}}
       </div>
     </form>
-    <div ng-controller="friendsCtrl">
-      <table id="friends_table" class="table table-bordered table-hover table-condensed">
-        <thead>
-          <tr>
-            <th>Your Friends</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="friend in friends | orderBy : 'name' ">
-            <td>{{friend.name}}</td>
-          </tr>
-        </tbody>
-      </table>
-    <div>
-    <button id="settings_button" onclick="window.location.href='./settings.php'" class="btn btn-default">Settings</button>
-    <button id="logout_button" onclick="window.location.href='./logout.php'" class="btn btn-default">Logout</button>
+    <div class="right_panel">
+      <button id="settings_button" onclick="window.location.href='./settings.php'" class="btn btn-default">Settings</button>
+      <button id="logout_button" onclick="window.location.href='./logout.php'" class="btn btn-default">Logout</button>
+      <div id="incoming_friend_requests" ng-controller="friend_requestsCtrl">
+        <table id="incoming_friend_requests_table" class="table table-bordered table-hover table-condensed">
+          <thead class="table table-bordered table-hover">
+            <tr>
+              <th>Friend Requests</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="friend_request in friend_requests">
+              <td>{{friend_request.name}}</td>   
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div ng-controller="friendsCtrl">
+        <table id="friends_table" class="table table-bordered table-hover table-condensed">
+          <thead>
+            <tr>
+              <th>Your Friends</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="friend in friends | orderBy : 'name' ">
+              <td>{{friend.name}}</td>
+            </tr>
+          </tbody>
+        </table>
+      <div>
+    </div>
     <script src="../js/messenger.js"></script>
   </body>
 </html>
