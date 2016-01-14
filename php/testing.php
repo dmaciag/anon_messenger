@@ -18,7 +18,7 @@ while( $user = mysql_fetch_assoc($registered_users) ){
 }
 $search_arr = array("users" => $json_user_response);
 
-mysql_close();
+mysql_close($connect);
 
 echo json_encode($search_arr);
 

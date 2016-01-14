@@ -38,7 +38,9 @@ if(
 	}
 }
 
-$check_if_exists_user_sql = "SELECT username FROM registered_users WHERE username = \"$username\"";
+$check_if_exists_user_sql = "SELECT username 
+							 FROM registered_users 
+							 WHERE username = \"$username\"";
 $registered_users = mysql_query($check_if_exists_user_sql);
 
 if( !$registered_users ){
@@ -49,21 +51,24 @@ if( !$registered_users ){
 
 if( mysql_num_rows($registered_users) >= 1 ){
 	$_SESSION['user_already_exists_in_db'] = true;
-	if( !redirect_register() ) die( 'Did not redirect to registration from registration properly' );
+	mysql_close($connect);
+	if( !redirect_register() ) die( 'Did not redirect to registration from registration properly error#10211' );
 
 }
 else{
 	$_SESSION['user_already_exists_in_db'] = false;
 }
 
-$regisitration_sql = "INSERT INTO registered_users (username, email, password)	VALUES ('$username', '$email', '$password')";
+$regisitration_sql =   "INSERT INTO registered_users (username, email, password)	
+						VALUES ('$username', '$email', '$password')";
 
 if( !mysql_query($regisitration_sql) ) die('Cannot register user to database, error: ' . mysql_error());
 
 $_SESSION['username'] = $username;
 $_SESSION['is_logged_in'] = true;
 
-if ( !redirect_messenger() ) die('Did not redirect to messenger from registration properly');
+mysql_close($connect);
+if ( !redirect_messenger() ) die('Did not redirect to messenger from registration properly error#10111');
 
 echo "successfuly Registered, but you shouldn't see this\n";
 

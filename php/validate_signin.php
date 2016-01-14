@@ -17,7 +17,9 @@ $password = $_POST[password];
 $username = strip_data($username);
 $password = strip_data($password);
 
-$user_pass_sql = "SELECT username, password FROM registered_users WHERE username = \"$username\"";
+$user_pass_sql =   "SELECT username, password 
+					FROM   registered_users 
+					WHERE  username = \"$username\"";
 $registered_users = mysql_query($user_pass_sql);
 
 if( !$registered_users ){
@@ -26,23 +28,24 @@ if( !$registered_users ){
 	die( $error_mesage );
 }
 
-if( mysql_num_rows($registered_users) == 1 ){
+if( mysql_num_rows($registered_users) === 1 ){
 	
 	$user = mysql_fetch_assoc($registered_users);
 
 	if( $user["username"] == $username && $user["password"] == $password ){
 		$_SESSION['is_logged_in'] = true;
 		$_SESSION['username'] = $username;
-		if( !redirect_messenger() ) die( 'did not redirect to messenger from signin' );
+		mysql_close($connect);
+		if( !redirect_messenger() ) die( 'did not redirect to messenger from signin error#10011' );
 	}
 	else{
+		mysql_close($connect);
 		echo "Invalid password !";
 	}
 }
 else{
+	mysql_close($connect);
 	echo "User is not registered. " .'<br>';
 }
-
-mysql_close($connect);
 
 ?>

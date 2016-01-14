@@ -6,11 +6,12 @@ require '../config.php';
 require '../functions.php';
 
 if( !$_SESSION['is_logged_in'] ){
-	if( !redirect_signin() ) die('Something went wrong on the add_friend page.');
+	if( !redirect_signin() ) die('Something went wrong on the add_friend page. error #10101');
 }
 
 $friend_username = strip_data($_GET['search_query']);
 $current_username = strip_data($_SESSION['username']);
+
 if( $friend_username === $current_username){
 	echo 'cannot add yourself';
 }
@@ -40,7 +41,7 @@ else{
 		$check_friendships = mysql_query($check_friendships_sql);
 
 		if( mysql_num_rows($check_friendships) >= 1 ){
-			mysql_close();
+			mysql_close($connect);
 			echo 'already has friendship';
 		}
 		else{
@@ -54,16 +55,16 @@ else{
 				$error_mesage .= 'Desired query: ' . $insert_friendship_sql;
 				die( $error_mesage );
 			}
-			mysql_close();
+			mysql_close($connect);
 			echo "sent friend request to $friend_username";
 		}
 	}
 	else if(mysql_num_rows($find_friend) === 0){
-		mysql_close();
+		mysql_close($connect);
 		echo 'user not found';
 	}
 	else{
-		mysql_close();
+		mysql_close($connect);
 		echo 'Should not have found more than one of the same friend';
 	}
 }

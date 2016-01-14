@@ -18,12 +18,11 @@ if( !mysql_select_db($db_db) ) die('Cannot connect to db : $db_db, ' . mysql_err
 
 $username = strip_data($_SESSION['username']);
 
-$friendships = 
-"SELECT * FROM friend_combinations 
- WHERE  (receiver_name  = '$username' 
- AND 	 are_friends    = true)
- OR 	(requestor_name ='$username' 
- AND 	 are_friends    = true)";
+$friendships =  "SELECT * FROM friend_combinations 
+				 WHERE  (receiver_name  = '$username' 
+				 AND 	 are_friends    = true)
+				 OR 	(requestor_name ='$username' 
+				 AND 	 are_friends    = true)";
 $friendship = mysql_query( $friendships );
 
 while( $friend = mysql_fetch_assoc($friendship) ){
@@ -38,7 +37,7 @@ while( $friend = mysql_fetch_assoc($friendship) ){
 }
 $response_arr = array('friends' => $json_friend_response);
 
-mysql_close();
+mysql_close($connect);
 
 echo json_encode($response_arr);
 
