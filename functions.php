@@ -8,17 +8,17 @@ function devEnv(){
 }
 function redirect_signin(){
 	$app_name = devEnv();
-	return header("Location: http://localhost$app_name/app/signin.php");
+	return header("Location: http://localhost$app_name/php/signin.php");
 }
 
 function redirect_messenger(){
 	$app_name = devEnv();
-	return header("Location: http://localhost$app_name/app/messenger.php");
+	return header("Location: http://localhost$app_name/php/messenger.php");
 }
 
 function redirect_register(){
 	$app_name = devEnv();
-	return header("Location: http://localhost$app_name/app/register.php");
+	return header("Location: http://localhost$app_name/php/register.php");
 }
 
 function strip_data( $data_to_be_stripped ){
