@@ -17,9 +17,10 @@ $password = $_POST[password];
 $username = strip_data($username);
 $password = strip_data($password);
 
-$user_pass_sql =   "SELECT username, password 
-					FROM   registered_users 
-					WHERE  username = \"$username\"";
+$user_pass_sql =   
+"SELECT username, password 
+ FROM   registered_users 
+ WHERE  username = \"$username\"";
 $registered_users = mysql_query($user_pass_sql);
 
 if( !$registered_users ){

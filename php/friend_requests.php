@@ -17,12 +17,12 @@ if( !$connect ) die('Connection to mysql failed, error : ' . mysql_error());
 if( !mysql_select_db($db_db) ) die('Cannot connect to db : $db_db, ' . mysql_error());
 
 $find_friend_requests_sql = 
-	"SELECT requestor_name, receiver_name, are_friends 
-	 FROM   friend_combinations 
-	 WHERE  (requestor_name = '$current_username'
-	 AND     are_friends    = false)
-	 OR     (receiver_name  = '$current_username'
-	 AND     are_friends    = false)";
+"SELECT requestor_name, receiver_name, are_friends 
+ FROM   friend_combinations 
+ WHERE  (requestor_name = '$current_username'
+ AND     are_friends    = false)
+ OR     (receiver_name  = '$current_username'
+ AND     are_friends    = false)";
 $find_friend_requests = mysql_query($find_friend_requests_sql);
 
 $friends = array();

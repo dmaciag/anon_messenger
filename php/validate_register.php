@@ -38,9 +38,10 @@ if(
 	}
 }
 
-$check_if_exists_user_sql = "SELECT username 
-							 FROM registered_users 
-							 WHERE username = \"$username\"";
+$check_if_exists_user_sql = 
+"SELECT username 
+ FROM registered_users 
+ WHERE username = \"$username\"";
 $registered_users = mysql_query($check_if_exists_user_sql);
 
 if( !$registered_users ){
@@ -59,8 +60,9 @@ else{
 	$_SESSION['user_already_exists_in_db'] = false;
 }
 
-$regisitration_sql =   "INSERT INTO registered_users (username, email, password)	
-						VALUES ('$username', '$email', '$password')";
+$regisitration_sql =   
+"INSERT INTO registered_users (username, email, password)	
+ VALUES ('$username', '$email', '$password')";
 
 if( !mysql_query($regisitration_sql) ) die('Cannot register user to database, error: ' . mysql_error());
 

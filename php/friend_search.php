@@ -22,9 +22,10 @@ if( !$connect ) die('Connection to mysql failed, error : ' . mysql_error());
 
 if( !mysql_select_db($db_db) ) die('Cannot connect to db : $db_db, ' . mysql_error());
 
-$registered_users_sql = "SELECT username 
-						 FROM   registered_users 
-						 WHERE  username REGEXP '^$search_query_regex.*$'";
+$registered_users_sql = 
+"SELECT username 
+ FROM   registered_users 
+ WHERE  username REGEXP '^$search_query_regex.*$'";
 
 $registered_users = mysql_query( $registered_users_sql );
 

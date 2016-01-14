@@ -45,8 +45,9 @@ else{
 			echo 'already has friendship';
 		}
 		else{
-			$insert_friendship_sql =   "INSERT INTO friend_combinations (requestor_name, receiver_name, are_friends)
-										VALUES ('$current_username', '$friend_username', false)";
+			$insert_friendship_sql =   
+			"INSERT INTO friend_combinations (requestor_name, receiver_name, are_friends)
+			 VALUES ('$current_username', '$friend_username', false)";
 
 			$inserted_friendship = mysql_query($insert_friendship_sql);
 
