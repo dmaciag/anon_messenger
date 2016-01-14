@@ -1,4 +1,4 @@
-var app = angular.module('messenger', []);
+var app = angular.module('messenger', ['ngMdIcons']);
 
 app.controller('usersCtrl', function($scope, $http, $timeout) {
 
@@ -78,4 +78,13 @@ app.controller('friend_requestsCtrl', function($scope, $http){
 		error(function(response){
 			$scope.friend_requests = response || 'Failed to grab friend_requests';
 		});
+
+		$scope.accept_friend_request = function(friend){
+			console.log('accepting_friend');
+			console.log(friend);
+		};
+		$scope.reject_friend_request = function(friend){
+			console.log('rejecting friend');
+			console.log(friend);
+		};
 });

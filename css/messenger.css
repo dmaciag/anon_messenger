@@ -69,3 +69,9 @@ body {
 	right: 6px;
 	top: 10px;
 }
+
+#friend_request_buttons{
+	float: right;
+	position: relative;
+	top: 2px;
+}

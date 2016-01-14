@@ -18,6 +18,7 @@
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/messenger.css" type="text/css" rel ="stylesheet">
     <script src="../node_modules/angular/angular.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
     <script src="../js/jquery.js"></script>
   </head>
   <body>
@@ -56,7 +57,12 @@
           </thead>
           <tbody>
             <tr ng-repeat="friend_request in friend_requests">
-              <td>{{friend_request.name}}</td>   
+              <td>{{friend_request.name}}
+                <div id="friend_request_buttons">
+                  <ng-md-icon ng-click="accept_friend_request(friend_request.name)" icon="add" style="fill:green" size="15"></ng-md-icon> 
+                  <ng-md-icon ng-click="reject_friend_request(friend_request.name)" icon="clear" style="fill:red" size="15"></ng-md-icon>
+                </div> 
+              </td> 
             </tr>
           </tbody>
         </table>
