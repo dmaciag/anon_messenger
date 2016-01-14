@@ -56,9 +56,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="friend_request in friend_requests">
+            <tr ng-if="!has_friend_requests">
+              <td>{{warning_message}}</td>
+            </tr>
+            <tr ng-if="has_friend_requests" ng-repeat="friend_request in friend_requests">
               <td>{{friend_request.name}}
-                <div id="friend_request_buttons">
+                <div ng-if="has_friend_requests" id="friend_request_buttons">
                   <ng-md-icon ng-click="accept_friend_request(friend_request.name)" icon="add" style="fill:green" size="15"></ng-md-icon> 
                   <ng-md-icon ng-click="reject_friend_request(friend_request.name)" icon="clear" style="fill:red" size="15"></ng-md-icon>
                 </div> 

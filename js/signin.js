@@ -21,4 +21,3 @@ app.controller('sign_in_ctrl', function($scope, $http){
 	// 	};
 	
 });
-console.log('yo');

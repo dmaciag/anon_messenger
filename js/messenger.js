@@ -73,18 +73,34 @@ app.controller('friend_requestsCtrl', function($scope, $http){
 			url: './friend_requests.php',
 		}).
 		success(function(response){
-			$scope.friend_requests = response;
+			if(response[0]['warning'] != null){
+				$scope.warning_message = response[0]['warning'];
+				$scope.has_friend_requests = false;
+			}
+			else
+			{		
+				$scope.has_friend_requests = true;
+				$scope.friend_requests = response;
+			}
 		}).
 		error(function(response){
 			$scope.friend_requests = response || 'Failed to grab friend_requests';
 		});
 
 		$scope.accept_friend_request = function(friend){
-			console.log('accepting_friend');
-			console.log(friend);
+			$http({
+				method: 'POST',
+				url: './accept_friend_request.php',
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				data: { 'friend' : friend }
+			});
 		};
 		$scope.reject_friend_request = function(friend){
-			console.log('rejecting friend');
-			console.log(friend);
+			$http({
+				method: 'POST',
+				url: './reject_friend_request.php',
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				data: { 'friend' : friend }
+			});
 		};
 });
