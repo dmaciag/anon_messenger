@@ -22,29 +22,32 @@
     <script src="../js/jquery.js"></script>
   </head>
   <body>
-    <form ng-submit="submit_user()" ng-controller="usersCtrl">
-      <div id="search_user_container">
-        <div id="search_results">
-          <table id="users_table" class="table table-bordered table-hover">
-            <thead>
-              <tr>
-                <th><input id="users_table_input" type="text" ng-model="search_query" ng-keyup="search_keyup($event)" placeholder="Request a friend"/></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="slide" ng-show="message">
-                <td>message: {{message}}</td>
-              </tr>
-              <tr ng-repeat="user in users | user_search_filter:search_query">
-                <td ng-click="count = count +1" ng-init="count=0">{{user.username}} , {{count}}</td>
-              </tr>
-            </tbody>
-          </table>
+    <div class="left_panel">
+      <form ng-submit="submit_user()" ng-controller="usersCtrl">
+        <div id="search_user_container">
+          <div id="search_results">
+            <table id="users_table" class="table table-bordered table-hover">
+              <thead>
+                <tr id="users_table_input_row">
+                  <th><input id="users_table_input" type="text" ng-model="search_query" ng-keyup="search_keyup($event)" placeholder="Request a friend"/></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="slide" ng-show="message">
+                  <td>message: {{message}}</td>
+                </tr>
+                <tr ng-repeat="user in users | user_search_filter:search_query">
+                  <td ng-click="count = count +1" ng-init="count=0">{{user.username}} , {{count}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="default" ng-hide="hidden" ng-class="{fade: startFade}">Search Query: {{search_query}}</div> 
-        Requested friend : {{requested_friend}}
-      </div>
-    </form>
+      </form>
+    </div>
+    <div class="middle_panel">
+    has
+    </div>
     <div class="right_panel">
       <button id="settings_button" onclick="window.location.href='./settings.php'" class="btn btn-default">Settings</button>
       <button id="logout_button" onclick="window.location.href='./logout.php'" class="btn btn-default">Logout</button>
@@ -55,7 +58,7 @@
               <th>Friend Requests</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="friend_request_table_body">
             <tr ng-if="!has_friend_requests">
               <td>{{warning_message}}</td>
             </tr>

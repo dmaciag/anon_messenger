@@ -17,24 +17,20 @@
 #search_user_container{
 	position: relative;
 	top: 10px;
+	float: right;
 }
 
 #search_results{
 	position: relative;
-	left: 13px;
 }
 
 .form-control{
 	max-width: 200px;
 }
 
-body {
-	min-width: 600px; 
-	width: auto !important;
-}
-
 #friends_table{
 	max-width: 153px;
+	background: #fff;
 	position: relative;
 	top: -10px;
 }
@@ -45,9 +41,13 @@ body {
 }
 
 #users_table_input{
+	font-weight: 200;
+	outline: none;
 	border: none;
 	border-color: transparent;
-	font-weight: normal;
+}
+#users_table_input_row{
+	background: white;
 }
 
 #incoming_friend_requests_table{
@@ -55,15 +55,41 @@ body {
 	max-width: 153px;
 	top: 5px;
 }
+#friend_request_table_body{
+	background: whitesmoke;
+}
 
 .right_panel{
-	position: absolute;
-	right: 6px;
+	float: left;
+	position: relative;
 	top: 10px;
+	left: 2%;
 }
 
 #friend_request_buttons{
 	float: right;
 	position: relative;
 	top: 2px;
+}
+
+.middle_panel{
+	position: relative;
+	float: left;
+	height: 700px;
+	width: 625px;
+	top: 10px;
+	left: 15px;
+	border: 1px solid;
+}
+
+.left_panel{
+	width: 29%;
+	float: left;
+}
+
+body {
+	font-weight: 200;
+	background: beige;
+	min-width: 600px; 
+	width: auto !important;
 }
