@@ -22,25 +22,34 @@ $friend_data = json_decode( file_get_contents('php://input') , true);
 $friend_username = $friend_data['friend'];
 
 $user_messages_sql= 
-"SELECT *
+"SELECT message
  FROM   messages
  WHERE  receiver  = '$friend_username'
  AND    sender    = '$username'";
  
 $friend_messages_sql= 
-"SELECT *
+"SELECT message
  FROM   messages
  WHERE  receiver  = '$username'
  AND    sender    = '$friend_username'";
 
-$user_messages   = mysql_query( $user_messages_sql );
-$friend_messages = mysql_query( $friend_messages_sql );
+$user_messages_data   = mysql_query( $user_messages_sql );
+$friend_messages_data = mysql_query( $friend_messages_sql );
 
+$user_messages   = array();
+$friend_messages = array();
 
+while( $user_message_data = mysql_fetch_assoc($user_messages_data) ){
+	$message = $user_message_data['message'];	
+	array_push($user_messages, $message);
+}
+while( $friend_message_data = mysql_fetch_assoc($friend_messages_data) ){
+	$message = $friend_message_data['message'];	
+	array_push($friend_messages, $message);
+}
 
+$POST_contents = array('user_messages' => $user_messages, 'friend_messages' => $friend_messages);
 
-var_dump($friend_username);
-
-
+echo json_encode(($POST_contents));
 
 ?>

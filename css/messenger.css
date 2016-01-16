@@ -80,7 +80,6 @@
 	width: 625px;
 	top: 10px;
 	left: 15px;
-	border: 1px solid;
 }
 
 .left_panel{
@@ -96,22 +95,57 @@ body {
 }
 
 .messages_body{
-	border: 1px solid;
-	height: 80%;
+	background-color: rgb(110,160,163);
+	height: 85%;
 }
 
 .new_message_body{
+
 	position: relative;
 	border: 1px	solid;
-	height: 20%;
+	height: 15%;
 }
 
+.message{
+	padding: 10px 18px;
+	box-shadow: 0 1px 0 #B2B2B2;
+	border-radius: 5px;
+	top: 5px;
+	border-radius: 5px;
+	margin-bottom: 4px;
+}
 
+.you{
+	background-color:#72DEFF;
+	margin: 5px 45px 5px 20px;  
+}
 
+.me{
+	background-color: #8EEE64;
+}
 
+.actual_message_friend{
+	position: relative;
+	vertical-align: top;
+	word-wrap: break-word;
+}
 
+.actual_message_user{
+	max-width: 80%;
+	margin-left: 20px;
+	position: relative;
+	word-wrap: break-word;
+	vertical-align: top;
+}
 
-
+#new_message_textarea{
+	height:100%;
+	width:100%;
+	border:1px 
+	solid #a6a6a6;
+    background-color:#fff9eb;
+    resize:none
+}
 
 
 

@@ -75,9 +75,12 @@ app.controller('friendsCtrl', function($scope, $http){
 			data: { 'friend' : $scope.selected['name'] }
 		}).
 		success(function(response){
-			$scope.messages = response;
-			console.log('messages: ');
-			console.log($scope.messages);
+			$scope.user_messages   = response['user_messages'];
+			$scope.friend_messages = response['friend_messages'];
+			console.log('user messages: ');
+			console.log($scope.user_messages);
+			console.log('friend messages: ');
+			console.log($scope.friend_messages);
 		}).
 		error(function(response){
 			console.log('error response');
@@ -123,3 +126,29 @@ app.controller('friend_requestsCtrl', function($scope, $http){
 		});
 	};
 });
+
+app.controller('messages_ctrl', function($scope, $http){
+	$scope.send_message = function(keyDown){
+		if( keyDown.keyCode == 13 && 
+			keyDown.shiftKey == false  && 
+			$scope.the_message != null && 
+			$scope.the_message != "")
+		{
+			$scope.the_message = '';
+			keyDown.preventDefault();
+			console.log('sending message');
+			//send message
+			$http({
+				metho: 'POST',
+				url: './send_message.php',
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				data: { 'message' : $scope.the_message }
+			});
+			$scope.the_message = '';
+		}
+	};
+});
+
+
+
+

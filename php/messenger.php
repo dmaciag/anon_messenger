@@ -45,12 +45,16 @@
         </div>
       </form>
     </div>
-    <div class="middle_panel">
+    <div class="middle_panel" ng-controller="messages_ctrl">
       <div class="messages_body">
-        message_body : {{friend_body_message}}
+        <div class="row message you actual_message_friend" ng-repeat="friend_message in friend_messages">
+          friend message: {{friend_message}}</div>
+        <div class="row message me actual_message_user" ng-repeat="user_message in user_messages">
+          user message: {{user_message}}</div>
       </div>
       <div class="new_message_body">
-        new_message_body
+        <textarea ng-keyup="send_message($event)" ng-model="the_message" id="new_message_textarea" wrap="soft" placeholder="Enter your message." maxlength="2000" type="text"></textarea>
+        {{the_message}}
       </div>
     </div>
     <div class="right_panel">
