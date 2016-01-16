@@ -27,9 +27,6 @@ $update_friendships_sql =
 
 $updated_friendship = mysql_query($update_friendships_sql);
 
-
-
 mysql_close($connect);
-//todo
 
 ?>

@@ -21,7 +21,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
     <script src="../js/jquery.js"></script>
   </head>
-  <body>
+  <body ng-controller="friendsCtrl">
     <div class="left_panel">
       <form ng-submit="submit_user()" ng-controller="usersCtrl">
         <div id="search_user_container">
@@ -46,7 +46,12 @@
       </form>
     </div>
     <div class="middle_panel">
-    has
+      <div class="messages_body">
+        message_body : {{friend_body_message}}
+      </div>
+      <div class="new_message_body">
+        new_message_body
+      </div>
     </div>
     <div class="right_panel">
       <button id="settings_button" onclick="window.location.href='./settings.php'" class="btn btn-default">Settings</button>
@@ -73,7 +78,7 @@
           </tbody>
         </table>
       </div>
-      <div ng-controller="friendsCtrl">
+      <div>
         <table id="friends_table" class="table table-bordered table-hover table-condensed">
           <thead>
             <tr>
@@ -81,11 +86,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="friend in friends | orderBy : 'name' ">
-              <td>{{friend.name}}</td>
+            <tr ng-repeat="friend in friends | orderBy : 'name' " ng-click="selected_friend();">
+              <td>{{friend.name}}</td> 
             </tr>
           </tbody>
         </table>
+        {{friend_body_message}}
       <div>
     </div>
     <script src="../js/messenger.js"></script>

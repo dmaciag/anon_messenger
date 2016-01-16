@@ -55,6 +55,7 @@
 	max-width: 153px;
 	top: 5px;
 }
+
 #friend_request_table_body{
 	background: whitesmoke;
 }
@@ -93,3 +94,42 @@ body {
 	min-width: 600px; 
 	width: auto !important;
 }
+
+.messages_body{
+	border: 1px solid;
+	height: 80%;
+}
+
+.new_message_body{
+	position: relative;
+	border: 1px	solid;
+	height: 20%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

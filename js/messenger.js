@@ -65,42 +65,61 @@ app.controller('friendsCtrl', function($scope, $http){
 	error(function(response){
 		$scope.users = response || 'Failed to grab current friends';
 	});
+
+	$scope.selected_friend = function(){
+		$scope.selected = this.friend;
+		$http({
+			method: 'POST',
+			url: './get_messages.php',
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: { 'friend' : $scope.selected['name'] }
+		}).
+		success(function(response){
+			$scope.messages = response;
+			console.log('messages: ');
+			console.log($scope.messages);
+		}).
+		error(function(response){
+			console.log('error response');
+		});
+		console.log($scope.friend_body_message);
+	}
 });
 
 app.controller('friend_requestsCtrl', function($scope, $http){
+	$http({
+		method: 'POST',
+		url: './friend_requests.php',
+	}).
+	success(function(response){
+		if(response[0]['warning'] != null){
+			$scope.warning_message = response[0]['warning'];
+			$scope.has_friend_requests = false;
+		}
+		else
+		{		
+			$scope.has_friend_requests = true;
+			$scope.friend_requests = response;
+		}
+	}).
+	error(function(response){
+		$scope.friend_requests = response || 'Failed to grab friend_requests';
+	});
+
+	$scope.accept_friend_request = function(friend){
 		$http({
 			method: 'POST',
-			url: './friend_requests.php',
-		}).
-		success(function(response){
-			if(response[0]['warning'] != null){
-				$scope.warning_message = response[0]['warning'];
-				$scope.has_friend_requests = false;
-			}
-			else
-			{		
-				$scope.has_friend_requests = true;
-				$scope.friend_requests = response;
-			}
-		}).
-		error(function(response){
-			$scope.friend_requests = response || 'Failed to grab friend_requests';
+			url: './accept_friend_request.php',
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: { 'friend' : friend }
 		});
-
-		$scope.accept_friend_request = function(friend){
-			$http({
-				method: 'POST',
-				url: './accept_friend_request.php',
-				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-				data: { 'friend' : friend }
-			});
-		};
-		$scope.reject_friend_request = function(friend){
-			$http({
-				method: 'POST',
-				url: './reject_friend_request.php',
-				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-				data: { 'friend' : friend }
-			});
-		};
+	};
+	$scope.reject_friend_request = function(friend){
+		$http({
+			method: 'POST',
+			url: './reject_friend_request.php',
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+			data: { 'friend' : friend }
+		});
+	};
 });
