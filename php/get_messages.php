@@ -22,13 +22,13 @@ $friend_data = json_decode( file_get_contents('php://input') , true);
 $friend_username = $friend_data['friend'];
 
 $user_messages_sql= 
-"SELECT message
+"SELECT message, date_created
  FROM   messages
  WHERE  receiver  = '$friend_username'
  AND    sender    = '$username'";
  
 $friend_messages_sql= 
-"SELECT message
+"SELECT message, date_created
  FROM   messages
  WHERE  receiver  = '$username'
  AND    sender    = '$friend_username'";
@@ -40,16 +40,18 @@ $user_messages   = array();
 $friend_messages = array();
 
 while( $user_message_data = mysql_fetch_assoc($user_messages_data) ){
-	$message = $user_message_data['message'];	
-	array_push($user_messages, $message);
+	$user_message['message'] 	= $user_message_data['message'];
+	$user_message['date_created']= $user_message_data['date_created'];
+	array_push($user_messages, $user_message);
 }
 while( $friend_message_data = mysql_fetch_assoc($friend_messages_data) ){
-	$message = $friend_message_data['message'];	
-	array_push($friend_messages, $message);
+	$friend_message['message'] 	= $friend_message_data['message'];
+	$friend_message['date_created']= $friend_message_data['date_created'];
+	array_push($friend_messages, $friend_message);
 }
 
 $POST_contents = array('user_messages' => $user_messages, 'friend_messages' => $friend_messages);
 
-echo json_encode(($POST_contents));
+echo json_encode($POST_contents);
 
 ?>

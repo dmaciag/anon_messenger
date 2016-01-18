@@ -21,7 +21,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
     <script src="../js/jquery.js"></script>
   </head>
-  <body ng-controller="friendsCtrl">
+  <body ng-controller="friends_and_messagesCtrl">
     <div class="left_panel">
       <form ng-submit="submit_user()" ng-controller="usersCtrl">
         <div id="search_user_container">
@@ -45,15 +45,12 @@
         </div>
       </form>
     </div>
-    <div class="middle_panel" ng-controller="messages_ctrl">
+    <div class="middle_panel" ng-controller="friends_and_messagesCtrl">
       <div class="messages_body">
-        <div class="row message you actual_message_friend" ng-repeat="friend_message in friend_messages">
-          friend message: {{friend_message}}</div>
-        <div class="row message me actual_message_user" ng-repeat="user_message in user_messages">
-          user message: {{user_message}}</div>
+        <div class="row message you actual_message_friend" ng-repeat="all_message in all_messages track by $index">{{all_message.message}}</div>
       </div>
       <div class="new_message_body">
-        <textarea ng-keyup="send_message($event)" ng-model="the_message" id="new_message_textarea" wrap="soft" placeholder="Enter your message." maxlength="2000" type="text"></textarea>
+        <textarea ng-keydown="send_message($event)" ng-model="the_message" id="new_message_textarea" wrap="soft" placeholder="Enter your message." maxlength="2000" type="text"></textarea>
         {{the_message}}
       </div>
     </div>

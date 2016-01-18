@@ -54,7 +54,7 @@ app.filter('user_search_filter', function(){
 	}
 });
 
-app.controller('friendsCtrl', function($scope, $http){
+app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
 	$http({
 		method: 'GET',
 		url: './current_friends.php'
@@ -68,6 +68,7 @@ app.controller('friendsCtrl', function($scope, $http){
 
 	$scope.selected_friend = function(){
 		$scope.selected = this.friend;
+		$scope.current_friend = this.friend;
 		$http({
 			method: 'POST',
 			url: './get_messages.php',
@@ -75,21 +76,58 @@ app.controller('friendsCtrl', function($scope, $http){
 			data: { 'friend' : $scope.selected['name'] }
 		}).
 		success(function(response){
+
+			console.log('response');
+			console.log(response);
 			$scope.user_messages   = response['user_messages'];
-			$scope.friend_messages = response['friend_messages'];
-			console.log('user messages: ');
+			console.log('user messages');
 			console.log($scope.user_messages);
-			console.log('friend messages: ');
-			console.log($scope.friend_messages);
+			$scope.friend_messages = response['friend_messages'];
+			$scope.all_messages = $scope.user_messages.concat($scope.friend_messages);
+			console.log($scope.all_messages.length);
+
 		}).
 		error(function(response){
 			console.log('error response');
 		});
-		console.log($scope.friend_body_message);
 	}
+
+	$scope.send_message = function(keyDown){
+		if( 
+			keyDown.keyCode == 13 && 
+			keyDown.shiftKey == false  && 
+			$scope.the_message != null && 
+			$scope.the_message != ""
+		  )
+		{
+            keyDown.preventDefault();
+            $scope.inject_message = {
+            	'message' 			: $scope.the_message,
+            	'date_created'   	: '2016-01-18 05:48:18'
+            };
+            $scope.all_messages = $scope.all_messages.concat($scope.inject_message);
+
+			//send message
+			$http({
+				method: 'POST',
+				url: './send_message.php',
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				data: { 				
+					'message' : $scope.the_message,
+					'friend'  : $scope.current_friend['name']
+				}
+			}).success(function(response){
+				console.log(response);
+			}).error(function(){
+				console.log(response);
+			});
+			$scope.the_message = '';
+
+		}
+	};
 });
 
-app.controller('friend_requestsCtrl', function($scope, $http){
+app.controller('friend_requestsCtrl', function($scope, $http, $rootScope){
 	$http({
 		method: 'POST',
 		url: './friend_requests.php',
@@ -124,28 +162,6 @@ app.controller('friend_requestsCtrl', function($scope, $http){
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: { 'friend' : friend }
 		});
-	};
-});
-
-app.controller('messages_ctrl', function($scope, $http){
-	$scope.send_message = function(keyDown){
-		if( keyDown.keyCode == 13 && 
-			keyDown.shiftKey == false  && 
-			$scope.the_message != null && 
-			$scope.the_message != "")
-		{
-			$scope.the_message = '';
-			keyDown.preventDefault();
-			console.log('sending message');
-			//send message
-			$http({
-				metho: 'POST',
-				url: './send_message.php',
-				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-				data: { 'message' : $scope.the_message }
-			});
-			$scope.the_message = '';
-		}
 	};
 });
 
