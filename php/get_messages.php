@@ -34,10 +34,10 @@ $all_messages_data   = mysql_query( $all_messages_sql );
 $all_messages   = array();
 
 while( $all_message_data = mysql_fetch_assoc($all_messages_data) ){
-	$message['sender']			= ($username === $all_message_data['sender']) ? 'current_user' : 'friend';
-	$message['id']				= $all_message_data['id'];
-	$message['message'] 		= $all_message_data['message'];
-	$message['date_created']	= $all_message_data['date_created'];
+	$message['sender']          = ($username === $all_message_data['sender']) ? 'current_user' : 'friend';
+	$message['id']              = $all_message_data['id'];
+	$message['message']         = $all_message_data['message'];
+	$message['date_created']    = $all_message_data['date_created'];
 	array_push($all_messages, $message);
 }
 
