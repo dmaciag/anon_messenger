@@ -70,6 +70,7 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
 	$scope.selected_friend = function(){
 		$scope.selected = this.friend;
 		$scope.current_friend = this.friend;
+		console.log('selected friend: %o', $scope.current_friend);
 		$http({
 			method: 'POST',
 			url: './get_messages.php',
