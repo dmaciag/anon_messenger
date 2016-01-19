@@ -14,8 +14,8 @@ $message_data = json_decode(file_get_contents('php://input'),true);
 $message  = $message_data['message'];
 $receiver = $message_data['friend'];
 $sender   = $_SESSION['username'];
+// $date_created = $message_data['date_created'];
 $date_created = date("Y-m-d h:i:sa");
-
 
 $connect = mysql_connect($db_hostname, $db_username, $db_password);
 

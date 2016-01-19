@@ -46,8 +46,8 @@
       </form>
     </div>
     <div class="middle_panel" ng-controller="friends_and_messagesCtrl">
-      <div class="messages_body">
-        <div class="row message you actual_message_friend" ng-repeat="all_message in all_messages track by $index">{{all_message.message}}</div>
+      <div class="messages_body" id="messages_body_id">
+        <div class="message" ng-class="message_obj.sender" ng-repeat="message_obj in all_messages track by $index">{{message_obj.message}}</div>
       </div>
       <div class="new_message_body">
         <textarea ng-keydown="send_message($event)" ng-model="the_message" id="new_message_textarea" wrap="soft" placeholder="Enter your message." maxlength="2000" type="text"></textarea>

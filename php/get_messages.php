@@ -21,36 +21,27 @@ $username = strip_data($_SESSION['username']);
 $friend_data = json_decode( file_get_contents('php://input') , true);
 $friend_username = $friend_data['friend'];
 
-$user_messages_sql= 
-"SELECT message, date_created
+$all_messages_sql= 
+"SELECT message, date_created, id, sender
  FROM   messages
- WHERE  receiver  = '$friend_username'
- AND    sender    = '$username'";
+ WHERE  (receiver  = '$friend_username'
+ AND    sender     = '$username')
+ OR 	(receiver  = '$username'
+ AND    sender     = '$friend_username')";
  
-$friend_messages_sql= 
-"SELECT message, date_created
- FROM   messages
- WHERE  receiver  = '$username'
- AND    sender    = '$friend_username'";
 
-$user_messages_data   = mysql_query( $user_messages_sql );
-$friend_messages_data = mysql_query( $friend_messages_sql );
+$all_messages_data   = mysql_query( $all_messages_sql );
+$all_messages   = array();
 
-$user_messages   = array();
-$friend_messages = array();
-
-while( $user_message_data = mysql_fetch_assoc($user_messages_data) ){
-	$user_message['message'] 	= $user_message_data['message'];
-	$user_message['date_created']= $user_message_data['date_created'];
-	array_push($user_messages, $user_message);
-}
-while( $friend_message_data = mysql_fetch_assoc($friend_messages_data) ){
-	$friend_message['message'] 	= $friend_message_data['message'];
-	$friend_message['date_created']= $friend_message_data['date_created'];
-	array_push($friend_messages, $friend_message);
+while( $all_message_data = mysql_fetch_assoc($all_messages_data) ){
+	$all_message['sender']		    = ($username === $all_message_data['sender']) ? 'current_user' : 'friend';
+	$all_message['id']				= $all_message_data['id'];
+	$all_message['message'] 	    = $all_message_data['message'];
+	$all_message['date_created']    = $all_message_data['date_created'];
+	array_push($all_messages, $all_message);
 }
 
-$POST_contents = array('user_messages' => $user_messages, 'friend_messages' => $friend_messages);
+$POST_contents = array('all_messages' => $all_messages);
 
 echo json_encode($POST_contents);
 

@@ -88,15 +88,15 @@
 }
 
 body {
+	background-color: #666;
 	font-weight: 200;
-	background: beige;
 	min-width: 600px; 
 	width: auto !important;
 }
 
 .messages_body{
 	overflow-y:scroll;
-	background-color: rgb(110,160,163);
+	background-color: rgb(20,30,25);
 	height: 85%;
 }
 
@@ -109,20 +109,13 @@ body {
 
 .message{
 	padding: 10px 18px;
-	box-shadow: 0 1px 0 #B2B2B2;
 	border-radius: 5px;
+	font-family: “Courier New”, Courier, mono; 
+	background-color: rgb(40, 40, 40);
 	top: 5px;
 	border-radius: 5px;
 	margin-bottom: 4px;
-}
-
-.you{
-	background-color:#72DEFF;
-	margin: 5px 45px 5px 20px;  
-}
-
-.me{
-	background-color: #8EEE64;
+	font-weight: 400;
 }
 
 .actual_message_friend{
@@ -142,12 +135,21 @@ body {
 #new_message_textarea{
 	height:100%;
 	width:100%;
-	border:1px 
-	solid #a6a6a6;
-    background-color:#fff9eb;
+	color: lightgreen;
+	border:1px solid #000;
+    background-color: rgb(40, 40, 40);
     resize:none;
 }
 
+.friend{
+	color: red;
+	margin: 5px 45px 5px 20px;  
+}
+
+.current_user{
+	color: #76EE00;
+	margin: 5px 45px 5px 20px;  
+}
 
 
 

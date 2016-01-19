@@ -66,6 +66,7 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
 		$scope.users = response || 'Failed to grab current friends';
 	});
 
+	//also gets messages
 	$scope.selected_friend = function(){
 		$scope.selected = this.friend;
 		$scope.current_friend = this.friend;
@@ -76,15 +77,8 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
 			data: { 'friend' : $scope.selected['name'] }
 		}).
 		success(function(response){
-
-			console.log('response');
-			console.log(response);
-			$scope.user_messages   = response['user_messages'];
-			console.log('user messages');
-			console.log($scope.user_messages);
-			$scope.friend_messages = response['friend_messages'];
-			$scope.all_messages = $scope.user_messages.concat($scope.friend_messages);
-			console.log($scope.all_messages.length);
+			$scope.all_messages   = response['all_messages'];
+			console.log($scope.all_messages);
 
 		}).
 		error(function(response){
@@ -101,20 +95,27 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
 		  )
 		{
             keyDown.preventDefault();
+            var date = new Date();
+
+            console.log('date: %o', $scope.date);
             $scope.inject_message = {
             	'message' 			: $scope.the_message,
-            	'date_created'   	: '2016-01-18 05:48:18'
+            	'date_created'   	: '2016-01-18 06:20:20',
+            	'sender'			: 'current_user'
             };
             $scope.all_messages = $scope.all_messages.concat($scope.inject_message);
+            for(var i = 0; i< $scope.all_messages.length; i++){
+            	console.log($scope.all_messages[i]['sender']);
+            }
 
-			//send message
 			$http({
 				method: 'POST',
 				url: './send_message.php',
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 				data: { 				
 					'message' : $scope.the_message,
-					'friend'  : $scope.current_friend['name']
+					'friend'  : $scope.current_friend['name'],
+					'date_created' : date
 				}
 			}).success(function(response){
 				console.log(response);
@@ -123,6 +124,8 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
 			});
 			$scope.the_message = '';
 
+			var message_body = document.getElementById("messages_body_id");
+			message_body.scrollTop = message_body.scrollHeight;
 		}
 	};
 });
