@@ -70,7 +70,7 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
 	$scope.selected_friend = function(){
 		$scope.selected = this.friend;
 		$scope.current_friend = this.friend;
-		console.log('selected friend: %o', $scope.current_friend);
+		console.log('selected friend: %o', $scope.selected['name']);
 		$http({
 			method: 'POST',
 			url: './get_messages.php',
@@ -79,11 +79,9 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
 		}).
 		success(function(response){
 			$scope.all_messages   = response['all_messages'];
-			console.log($scope.all_messages);
-
 		}).
 		error(function(response){
-			console.log('error response');
+			console.log('error response %o: ', response);
 		});
 	}
 
@@ -95,19 +93,20 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
 			$scope.the_message != ""
 		  )
 		{
+			if( $rootScope.id == null ) $rootScope.id = 300;
+			++$rootScope.id;
             keyDown.preventDefault();
             var date = new Date();
-
-            console.log('date: %o', $scope.date);
+            //need to build better way of grabbing id, probably through http
+            // $scope.message_id = ++$scope.all_messages[$scope.all_messages.length - 1]['id'];
             $scope.inject_message = {
             	'message' 			: $scope.the_message,
-            	'date_created'   	: '2016-01-18 06:20:20',
-            	'sender'			: 'current_user'
+            	'date_created'		: '2016-01-19 05:55:55',
+            	'sender'			: 'current_user',
+             	'id'				: 300
             };
-            $scope.all_messages = $scope.all_messages.concat($scope.inject_message);
-            for(var i = 0; i< $scope.all_messages.length; i++){
-            	console.log($scope.all_messages[i]['sender']);
-            }
+
+            $scope.all_messages.push($scope.inject_message);
 
 			$http({
 				method: 'POST',
@@ -115,14 +114,13 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 				data: { 				
 					'message' : $scope.the_message,
-					'friend'  : $scope.current_friend['name'],
-					'date_created' : date
+					'friend'  : $scope.current_friend['name']
 				}
 			}).success(function(response){
-				console.log(response);
 			}).error(function(){
-				console.log(response);
+				console.log("error: %o", response);
 			});
+
 			$scope.the_message = '';
 
 			var message_body = document.getElementById("messages_body_id");

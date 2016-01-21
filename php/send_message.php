@@ -29,6 +29,8 @@ $insert_message_sql =
 
 $insert_message = mysql_query($insert_message_sql);
 
+echo json_encode('test_response');
+
 mysql_close($connect);
 
 ?>
