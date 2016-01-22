@@ -37,8 +37,8 @@ d<?php
                 <tr class="slide" ng-show="message">
                   <td>message: {{message}}</td>
                 </tr>
-                <tr ng-repeat="user in users | user_search_filter:search_query">
-                  <td ng-click="count = count +1" ng-init="count=0">{{user.username}} , {{count}}</td>
+                <tr class="user_row_wrap" ng-repeat="user in users | user_search_filter:search_query">
+                  <td class="user_row" ng-click="count = count +1" ng-init="count=0">{{user.username}} , {{count}}</td>
                 </tr>
               </tbody>
             </table>

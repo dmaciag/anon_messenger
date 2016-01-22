@@ -50,13 +50,21 @@
 }
 
 #users_table_input{
-	font-weight: 200;
+	font-weight: 400;
 	outline: none;
 	border: none;
 	border-color: transparent;
 }
 #users_table_input_row{
 	background: white;
+}
+
+.user_row{
+	color: red;
+}
+
+.user_row_wrap{
+	background-color: #333;
 }
 
 #incoming_friend_requests_table{
