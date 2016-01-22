@@ -65,12 +65,13 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
 	error(function(response){
 		$scope.users = response || 'Failed to grab current friends';
 	});
-
+	$scope.make_current = function(){
+		$scope.friend_selected_row_name = this.friend['name'];
+	};
 	//also gets messages
 	$scope.selected_friend = function(){
 		$scope.selected = this.friend;
 		$scope.current_friend = this.friend;
-		console.log('selected friend: %o', $scope.selected['name']);
 		$http({
 			method: 'POST',
 			url: './get_messages.php',
@@ -129,7 +130,8 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
 	};
 });
 
-app.controller('friend_requestsCtrl', function($scope, $http, $rootScope){
+app.controller('friend_requestsCtrl', function( $scope, $http, $rootScope ){
+
 	$http({
 		method: 'POST',
 		url: './friend_requests.php',
@@ -156,7 +158,20 @@ app.controller('friend_requestsCtrl', function($scope, $http, $rootScope){
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: { 'friend' : friend }
 		});
+
+		var friend_obj = {
+			'name' : friend
+		};
+		
+		var to_be_popped_index = _.findIndex($scope.friend_requests, friend_obj);
+		
+		$scope.friends.push(friend_obj);
+		
+		if( to_be_popped_index !== null){
+			$scope.friend_requests.splice(to_be_popped_index, 1);
+		}
 	};
+
 	$scope.reject_friend_request = function(friend){
 		$http({
 			method: 'POST',
@@ -165,6 +180,7 @@ app.controller('friend_requestsCtrl', function($scope, $http, $rootScope){
 			data: { 'friend' : friend }
 		});
 	};
+
 });
 
 

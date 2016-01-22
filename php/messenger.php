@@ -18,6 +18,7 @@ d<?php
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/messenger.css" type="text/css" rel ="stylesheet">
     <script src="../node_modules/angular/angular.js"></script>
+    <script src="../node_modules/underscore/underscore.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
     <script src="../js/jquery.js"></script>
   </head>
@@ -47,7 +48,7 @@ d<?php
     </div>
     <div class="middle_panel" ng-controller="friends_and_messagesCtrl">
       <div class="messages_body" id="messages_body_id">
-        <div class="message" ng-class="message_obj.sender" ng-repeat="message_obj in all_messages track by $index">
+          <div class="message" ng-class="message_obj.sender" ng-repeat="message_obj in all_messages track by $index">
         sender: {{message_obj.sender}}, 
         message: {{message_obj.message}}</div>
       </div>
@@ -82,15 +83,15 @@ d<?php
         </table>
       </div>
       <div>
-        <table id="friends_table" class="table table-bordered table-hover table-condensed">
+        <table id="friends_table" class="table table-bordered table-condensed">
           <thead>
             <tr>
-              <th>Your Friends</th>
+              <th class="friend_table_head">Your Friends</th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="friend in friends | orderBy : 'name' " ng-click="selected_friend();">
-              <td>{{friend.name}}</td> 
+            <tr ng-repeat="friend in friends | orderBy : 'name' " ng-click="selected_friend();make_current();">
+              <td class="friend_row" ng-class="{selected_friend : (friend.name == friend_selected_row_name) }">{{friend.name}}</td> 
             </tr>
           </tbody>
         </table>
