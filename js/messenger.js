@@ -163,12 +163,12 @@ app.controller('friend_requestsCtrl', function( $scope, $http, $rootScope ){
 			'name' : friend
 		};
 		
-		var to_be_popped_index = _.findIndex($scope.friend_requests, friend_obj);
+		var move_to_friends_index = _.findIndex($scope.friend_requests, friend_obj);
 		
 		$scope.friends.push(friend_obj);
 		
-		if( to_be_popped_index !== null){
-			$scope.friend_requests.splice(to_be_popped_index, 1);
+		if( move_to_friends_index !== null){
+			$scope.friend_requests.splice(move_to_friends_index, 1);
 		}
 	};
 
@@ -179,6 +179,17 @@ app.controller('friend_requestsCtrl', function( $scope, $http, $rootScope ){
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 			data: { 'friend' : friend }
 		});
+
+		var unwanted_friend_obj = {
+			'name' : friend
+		};
+
+		var delete_friend_request_index = _.findIndex($scope.friend_requests, unwanted_friend_obj);
+
+		if( delete_friend_request_index !== null){
+			$scope.friend_requests.splice(delete_friend_request_index, 1);
+		}
+
 	};
 
 });
