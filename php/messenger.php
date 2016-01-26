@@ -1,4 +1,4 @@
-d<?php
+<?php
   session_start();
   require '../functions.php';
   if( !$_SESSION['is_logged_in'] ){
@@ -34,6 +34,7 @@ d<?php
                 </tr>
               </thead>
               <tbody>
+                <tr><td>search query: {{search_query}}</td></tr>
                 <tr class="slide" ng-show="message">
                   <td>message: {{message}}</td>
                 </tr>
@@ -62,9 +63,9 @@ d<?php
       <button id="logout_button" onclick="window.location.href='./logout.php'" class="btn btn-default">Logout</button>
       <div id="incoming_friend_requests" ng-controller="friend_requestsCtrl">
         <table id="incoming_friend_requests_table" class="table table-bordered table-hover table-condensed">
-          <thead class="table table-bordered table-hover">
+          <thead class="table table-bordered table-hover friend_requests_head">
             <tr>
-              <th>Friend Requests</th>
+              <th class="friend_requests_head_row">Friend Requests</th>
             </tr>
           </thead>
           <tbody id="friend_request_table_body">

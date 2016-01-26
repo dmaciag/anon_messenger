@@ -77,6 +77,15 @@
 	background: whitesmoke;
 }
 
+.friend_requests_head{
+	border: hidden;
+	background: #333 !important;
+	color: #E61414 !important;
+}
+.friend_requests_head_row{
+	text-align: center;
+}
+
 .right_panel{
 	float: left;
 	position: relative;

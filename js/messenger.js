@@ -2,19 +2,22 @@ var app = angular.module('messenger', ['ngMdIcons']);
 
 app.controller('usersCtrl', function($scope, $http, $timeout) {
 
-	$scope.search_keyup = function(keyPress){
+	$scope.search_keyup = function(keyUp){
 		$http({
 			method: 'GET',
 			url: './friend_search.php',
 			params: { 'search_query' : $scope.search_query }
 		}).
 		success(function(response){
+			console.log('response %o', response);
+			angular.forEach(response, function(friend){
+				console.log('friend: %o', friend);
+			});
 			$scope.users = response.users;
 		}).
 		error(function(response){
 			$scope.users = response || 'Failed to grab users';
 		});
-
 	};
 
 	$scope.requested_friend = '';
