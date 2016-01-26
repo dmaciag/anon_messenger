@@ -22,7 +22,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
     <script src="../js/jquery.js"></script>
   </head>
-  <body ng-controller="friends_and_messagesCtrl">
+  <body ng-controller="friends_and_messagesCtrl" ng-cloak>
     <div class="left_panel">
       <form ng-submit="submit_user()" ng-controller="usersCtrl">
         <div id="search_user_container">
