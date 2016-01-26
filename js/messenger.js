@@ -9,15 +9,14 @@ app.controller('usersCtrl', function($scope, $http, $timeout) {
 			params: { 'search_query' : $scope.search_query }
 		}).
 		success(function(response){
-			console.log('response %o', response);
-			angular.forEach(response, function(friend){
-				console.log('friend: %o', friend);
-			});
 			$scope.users = response.users;
 		}).
 		error(function(response){
 			$scope.users = response || 'Failed to grab users';
 		});
+		// if( keyUp.keyCode == 13 ){
+		// 	$scope.users = [];
+		// }
 	};
 
 	$scope.requested_friend = '';
@@ -68,11 +67,20 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
 	error(function(response){
 		$scope.users = response || 'Failed to grab current friends';
 	});
+
+	console.log('main');
+	$rootScope.is_on_default_page = true;
+
 	$scope.make_current = function(){
 		$scope.friend_selected_row_name = this.friend['name'];
 	};
+
 	//also gets messages
 	$scope.selected_friend = function(){
+
+		$rootScope.is_on_default_page = false;
+
+
 		$scope.selected = this.friend;
 		$scope.current_friend = this.friend;
 		$http({

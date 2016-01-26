@@ -34,7 +34,6 @@
                 </tr>
               </thead>
               <tbody>
-                <tr><td>search query: {{search_query}}</td></tr>
                 <tr class="slide" ng-show="message">
                   <td>message: {{message}}</td>
                 </tr>
@@ -48,12 +47,24 @@
       </form>
     </div>
     <div class="middle_panel" ng-controller="friends_and_messagesCtrl">
-      <div class="messages_body" id="messages_body_id">
+      <div class="default_page" ng-show="is_on_default_page">
+        <div class="welcome_messages">
+          Welcome to Anon Messenger
+        </div>
+        <div class="welcome_messages">
+          Up to 20 messages are tracked between you and your budy. <br>
+          Messages older than 30 seconds are deleted. <br>  
+        </div>
+        <div class="welcome_messages">
+          Enjoy the Darkness!
+        </div>
+      </div>
+      <div class="messages_body" id="messages_body_id" ng-if="!is_on_default_page">
           <div class="message" ng-class="message_obj.sender" ng-repeat="message_obj in all_messages track by $index">
         sender: {{message_obj.sender}}, 
         message: {{message_obj.message}}</div>
       </div>
-      <div class="new_message_body">
+      <div class="new_message_body" ng-if="!is_on_default_page">
         <textarea ng-keydown="send_message($event)" ng-model="the_message" id="new_message_textarea" wrap="soft" placeholder="Enter your message." maxlength="2000" type="text"></textarea>
         {{the_message}}
       </div>
@@ -65,13 +76,13 @@
         <table id="incoming_friend_requests_table" class="table table-bordered table-hover table-condensed">
           <thead class="table table-bordered table-hover friend_requests_head">
             <tr>
-              <th class="friend_requests_head_row">Friend Requests</th>
+              <th class="friend_requests_head_row" ng-if="friend_requests.length > 0">Friend Requests</th>
             </tr>
           </thead>
           <tbody id="friend_request_table_body">
-            <tr ng-if="!has_friend_requests">
+           <!--  <tr ng-if="!has_friend_requests">
               <td>{{warning_message}}</td>
-            </tr>
+            </tr> -->
             <tr ng-if="has_friend_requests" ng-repeat="friend_request in friend_requests">
               <td>{{friend_request.name}}
                 <div ng-if="has_friend_requests" id="friend_request_buttons">
@@ -87,7 +98,7 @@
         <table id="friends_table" class="table table-bordered table-condensed">
           <thead>
             <tr>
-              <th class="friend_table_head">Your Friends</th>
+              <th class="friend_table_head" ng-if="friends.length > 0">Your Friends</th>
             </tr>
           </thead>
           <tbody>

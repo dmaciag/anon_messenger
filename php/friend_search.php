@@ -22,21 +22,26 @@ if( !$connect ) die('Connection to mysql failed, error : ' . mysql_error());
 
 if( !mysql_select_db($db_db) ) die('Cannot connect to db : $db_db, ' . mysql_error());
 
-$registered_users_sql = 
-"SELECT username 
- FROM   registered_users 
- WHERE  username LIKE '$search_query_like'
- LIMIT  10";
+if(!empty( $search_query ) ) {
+    $registered_users_sql = 
+    "SELECT username 
+     FROM   registered_users 
+     WHERE  username LIKE '$search_query_like'
+     LIMIT  10";
 
-$registered_users = mysql_query( $registered_users_sql );
+    $registered_users = mysql_query( $registered_users_sql );
 
-while( $user = mysql_fetch_assoc($registered_users) ){
-    $json_user['username'] = $user["username"];
-    $json_user_response[]  = $json_user;
+    while( $user = mysql_fetch_assoc($registered_users) ){
+        $json_user['username'] = $user["username"];
+        $json_user_response[]  = $json_user;
 
+    }
+
+    $search_arr = array("users" => $json_user_response);
 }
-
-$search_arr = array("users" => $json_user_response);
+else{
+    $search_arr = array("users" => null);
+}
 
 mysql_close($connect);
 

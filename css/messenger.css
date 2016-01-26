@@ -1,10 +1,26 @@
 #logout_button{
 	max-width: 100px;
 	position: relative;
+	background-color: rgb(60, 30, 20);
+	color: orange;
+	border: hidden;
+}
+
+#logout_button:hover {
+	background-color: rgb(35, 15, 10);
+	color: red;
 }
 
 #settings_button{
 	position: relative;
+	background-color: rgb(60, 30, 20);
+	color: orange;
+	border: hidden;
+}
+
+#settings_button:hover {
+	color: red;
+	background-color: rgb(35, 15, 10);
 }
 
 #messenger_search{
@@ -162,9 +178,11 @@ body {
 	height: 100%;
 	width: 100%;
 	color: white;
+	padding: 
 	border:1px solid #000;
     background-color: rgb(40, 40, 40);
     resize:none;
+    padding: 10px 20px 10px 20px;
 }
 
 .friend{
@@ -194,7 +212,20 @@ body {
 	color: rgb(230, 20, 20) !important;
 }
 
-
+.default_page{
+	text-align: center;
+	position: relative;
+	/*background-color: black;*/
+	height: 100%;
+	background-image: url("../jpg/fractal.jpg");
+	color: #E61414;
+	background-position: -529px 113px !important;
+}
+.welcome_messages{
+	font-weight: 500;
+	position: relative;
+	top: 10px;
+}
 
 
 
