@@ -1,4 +1,4 @@
-var app = angular.module('messenger', ['ngMdIcons']);
+var app = angular.module('messenger', ['ngMdIcons', 'luegg.directives']);
 
 app.controller('usersCtrl', function($scope, $http, $timeout) {
 
@@ -14,9 +14,6 @@ app.controller('usersCtrl', function($scope, $http, $timeout) {
 		error(function(response){
 			$scope.users = response || 'Failed to grab users';
 		});
-		// if( keyUp.keyCode == 13 ){
-		// 	$scope.users = [];
-		// }
 	};
 
 	$scope.requested_friend = '';
@@ -56,7 +53,7 @@ app.filter('user_search_filter', function(){
 	}
 });
 
-app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
+app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope, $interval){
 	$http({
 		method: 'GET',
 		url: './current_friends.php'
@@ -78,11 +75,9 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
 	//also gets messages
 	$scope.selected_friend = function(){
 
-		$rootScope.is_on_default_page = false;
-
-
 		$scope.selected = this.friend;
 		$scope.current_friend = this.friend;
+
 		$http({
 			method: 'POST',
 			url: './get_messages.php',
@@ -90,11 +85,30 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
 			data: { 'friend' : $scope.selected['name'] }
 		}).
 		success(function(response){
-			$scope.all_messages   = response['all_messages'];
+			$scope.all_messages = response['all_messages'];
 		}).
 		error(function(response){
-			console.log('error response %o: ', response);
+			console.log('initial error response %o: ', response);
 		});
+		
+		if( $rootScope.is_on_default_page ){
+				$interval(function(){
+					console.log('friend : %o', $scope.selected['name']);
+					$http({
+						method: 'POST',
+						url: './get_messages.php',
+						headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+						data: { 'friend' : $scope.selected['name'] }
+					}).
+					success(function(response){
+						$scope.all_messages = response['all_messages'];
+					}).
+					error(function(response){
+						console.log('continous error response %o: ', response);
+					});
+				}, 3000);
+		}
+		$rootScope.is_on_default_page = false;
 	}
 
 	$scope.send_message = function(keyDown){
@@ -105,6 +119,7 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
 			$scope.the_message != ""
 		  )
 		{
+			console.log('sending message');
 			if( $rootScope.id == null ) $rootScope.id = 300;
 			++$rootScope.id;
             keyDown.preventDefault();
@@ -128,7 +143,6 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
 					'message' : $scope.the_message,
 					'friend'  : $scope.current_friend['name']
 				}
-			}).success(function(response){
 			}).error(function(){
 				console.log("error: %o", response);
 			});
@@ -136,6 +150,7 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope){
 			$scope.the_message = '';
 
 			var message_body = document.getElementById("messages_body_id");
+			console.log(message_body.scrollHeight);
 			message_body.scrollTop = message_body.scrollHeight;
 		}
 	};

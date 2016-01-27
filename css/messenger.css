@@ -152,6 +152,7 @@ body {
 .message{
 	padding: 10px 18px;
 	border-radius: 5px;
+	word-break: break-all;
 	font-family: “Courier New”, Courier, mono; 
 	background-color: rgb(40, 40, 40);
 	top: 5px;
@@ -215,11 +216,10 @@ body {
 .default_page{
 	text-align: center;
 	position: relative;
-	/*background-color: black;*/
 	height: 100%;
-	background-image: url("../jpg/fractal.jpg");
+	background-image: url("../jpg/rose.jpg");
 	color: #E61414;
-	background-position: -529px 113px !important;
+	background-position: -420px !important;
 }
 .welcome_messages{
 	font-weight: 500;
@@ -227,6 +227,9 @@ body {
 	top: 10px;
 }
 
+#sub_right_panel{
+	/*Todo*/
+}
 
 
 
