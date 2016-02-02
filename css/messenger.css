@@ -142,13 +142,6 @@ body {
 	height: 85%;
 }
 
-.no_messages{
-	color: red;
-	top: 50%;
-	position: relative;
-	text-align: center;
-}
-
 .new_message_body{
 
 	position: relative;
@@ -186,11 +179,11 @@ body {
 	height: 100%;
 	width: 100%;
 	color: white;
-	border: hidden;
+	padding: 
+	border:1px solid #000;
     background-color: rgb(40, 40, 40);
     resize:none;
     padding: 10px 20px 10px 20px;
-
 }
 
 .friend{

@@ -1,6 +1,7 @@
 <?php 
 
 session_start();
+error_reporting(E_ERROR | E_PARSE);
 
 require '../config.php';
 require '../functions.php';

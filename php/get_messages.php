@@ -41,12 +41,7 @@ while( $all_message_data = mysql_fetch_assoc($all_messages_data) ){
 	array_push($all_messages, $message);
 }
 
-$latest_message_sql  = "SELECT id FROM messages ORDER BY id DESC LIMIT 1";
-$latest_message      = mysql_query( $latest_message_sql );
-$latest_message_data = mysql_fetch_assoc( $latest_message );
-$latest_message_id   = $latest_message_data['id'];
-
-$POST_contents = array('all_messages' => $all_messages, 'latest_message_id' => $latest_message_id );
+$POST_contents = array('all_messages' => $all_messages);
 
 echo json_encode($POST_contents);
 

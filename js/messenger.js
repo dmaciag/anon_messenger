@@ -54,7 +54,6 @@ app.filter('user_search_filter', function(){
 });
 
 app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope, $interval){
-	$rootScope.max_id = 1;
 	$http({
 		method: 'GET',
 		url: './current_friends.php'
@@ -66,6 +65,7 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope, $
 		$scope.users = response || 'Failed to grab current friends';
 	});
 
+	console.log('main');
 	$rootScope.is_on_default_page = true;
 
 	$scope.make_current = function(){
@@ -86,33 +86,29 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope, $
 		}).
 		success(function(response){
 			$scope.all_messages = response['all_messages'];
-			console.log('all messages : %o', $scope.all_messages );
-			$rootScope.max_id   = response['latest_message_id'];
-			console.log('max_id : %o', $rootScope.max_id );
 		}).
 		error(function(response){
 			console.log('initial error response %o: ', response);
 		});
-
+		
 		if( $rootScope.is_on_default_page ){
-			$interval(function(){
-				$http({
-					method: 'POST',
-					url: './get_messages.php',
-					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-					data: { 'friend' : $scope.selected['name'] }
-				}).
-				success(function(response){
-					$scope.all_messages = response['all_messages'];
-				}).
-				error(function(response){
-					console.log('continous error response %o: ', response);
-				});
-			}, 2000);
+				$interval(function(){
+					console.log('friend : %o', $scope.selected['name']);
+					$http({
+						method: 'POST',
+						url: './get_messages.php',
+						headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+						data: { 'friend' : $scope.selected['name'] }
+					}).
+					success(function(response){
+						$scope.all_messages = response['all_messages'];
+					}).
+					error(function(response){
+						console.log('continous error response %o: ', response);
+					});
+				}, 3000);
 		}
 		$rootScope.is_on_default_page = false;
-
-
 	}
 
 	$scope.send_message = function(keyDown){
@@ -123,39 +119,20 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope, $
 			$scope.the_message != ""
 		  )
 		{
+			console.log('sending message');
 			if( $rootScope.id == null ) $rootScope.id = 300;
 			++$rootScope.id;
             keyDown.preventDefault();
-
+            var date = new Date();
             //need to build better way of grabbing id, probably through http
             // $scope.message_id = ++$scope.all_messages[$scope.all_messages.length - 1]['id'];
             $scope.inject_message = {
             	'message' 			: $scope.the_message,
             	'date_created'		: '2016-01-19 05:55:55',
             	'sender'			: 'current_user',
-             	'id'				: ++$rootScope.max_id,
+             	'id'				: 300
             };
 
-            //change 8 to 20
-            if( $scope.all_messages.length >= 8 ) {
-
-            	console.log('first message : %o', $scope.all_messages[0]);
-            	$scope.message_to_be_deleted = $scope.all_messages[0];
-            	$scope.all_messages.shift();
-            	
-            	$http({
-					method: 'POST',
-					url: './destroy_old_messages.php',
-					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-					data: { 				
-						'del_message' : $scope.message_to_be_deleted
-					}
-				}).error( function(response){
-					console.log('failed to delete old message : %o', response);
-				});
-
-            }
-            console.log('max_id : %o', $rootScope.max_id);
             $scope.all_messages.push($scope.inject_message);
 
 			$http({
@@ -163,8 +140,8 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope, $
 				url: './send_message.php',
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 				data: { 				
-					'message'     : $scope.the_message,
-					'friend'      : $scope.current_friend['name'],
+					'message' : $scope.the_message,
+					'friend'  : $scope.current_friend['name']
 				}
 			}).error(function(){
 				console.log("error: %o", response);
@@ -173,7 +150,7 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope, $
 			$scope.the_message = '';
 
 			var message_body = document.getElementById("messages_body_id");
-			// console.log(message_body.scrollHeight);
+			console.log(message_body.scrollHeight);
 			message_body.scrollTop = message_body.scrollHeight;
 		}
 	};
@@ -240,8 +217,6 @@ app.controller('friend_requestsCtrl', function( $scope, $http, $rootScope ){
 		}
 
 	};
-
-	$scope.pop_db = function(){console.log('popping');};
 
 });
 
