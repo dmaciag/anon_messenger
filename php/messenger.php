@@ -47,7 +47,7 @@
         </div>
       </form>
     </div>
-    <div class="middle_panel" ng-controller="friends_and_messagesCtrl">
+    <div class="middle_panel">
       <div class="default_page" ng-show="is_on_default_page">
         <div class="welcome_messages">
           Welcome to Anon Messenger
@@ -58,11 +58,11 @@
         </div>
       </div>
       <div class="messages_body" id="messages_body_id" ng-if="!is_on_default_page" scroll-glue>
-          <div class="message" ng-class="message_obj.sender" ng-repeat="message_obj in all_messages track by $index">{{message_obj.message}}</div>
+          <div class="message" ng-class="message_obj.sender" ng-repeat="message_obj in all_messages track by $index">{{::message_obj.message}} {{ all_messages.length }}</div>
+          <div class="no_messages" ng-if="all_messages.length === 0">Empty Conversation</div>
       </div>
       <div class="new_message_body" ng-show="!is_on_default_page">
-        <textarea ng-keydown="send_message($event)" ng-model="the_message" id="new_message_textarea" wrap="soft" placeholder="Enter your message." maxlength="2000" type="text"></textarea>
-        {{::the_message}}
+        <textarea ng-keydown="send_message($event);pop_db();" ng-model="the_message" id="new_message_textarea" wrap="soft" placeholder="Enter your message." maxlength="2000" type="text"></textarea>
       </div>
     </div>
     <div class="right_panel">
