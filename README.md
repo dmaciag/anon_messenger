@@ -1,1 +1,1 @@
-This is a messenger app that doesn't track any personal information.
+[[https://github.com/dmaciag/anon_messenger/blob/master/jpg/jpg.jpg]]
