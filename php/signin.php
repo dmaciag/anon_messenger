@@ -29,7 +29,6 @@
           id="signin_form" 
           class="form-signin"
           action="./validate_signin.php"
-          >
         <h2 class="form-signin-heading" >Please sign in</h2>
         <label for="inputUsername" class="sr-only">Username</label>
         <input

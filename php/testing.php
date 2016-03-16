@@ -22,5 +22,4 @@ mysql_close($connect);
 
 echo json_encode($search_arr);
 
-
 ?>

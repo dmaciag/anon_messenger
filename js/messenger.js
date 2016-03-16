@@ -86,9 +86,7 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope, $
 		}).
 		success(function(response){
 			$scope.all_messages = response['all_messages'];
-			console.log('all messages : %o', $scope.all_messages );
 			$rootScope.max_id   = response['latest_message_id'];
-			console.log('max_id : %o', $rootScope.max_id );
 		}).
 		error(function(response){
 			console.log('initial error response %o: ', response);
@@ -123,23 +121,17 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope, $
 			$scope.the_message != ""
 		  )
 		{
-			if( $rootScope.id == null ) $rootScope.id = 300;
-			++$rootScope.id;
             keyDown.preventDefault();
 
             //need to build better way of grabbing id, probably through http
-            // $scope.message_id = ++$scope.all_messages[$scope.all_messages.length - 1]['id'];
             $scope.inject_message = {
             	'message' 			: $scope.the_message,
             	'date_created'		: '2016-01-19 05:55:55',
             	'sender'			: 'current_user',
-             	'id'				: ++$rootScope.max_id,
             };
 
-            //change 8 to 20
+            //change 8 to 20, 8 is for testing purposes
             if( $scope.all_messages.length >= 8 ) {
-
-            	console.log('first message : %o', $scope.all_messages[0]);
             	$scope.message_to_be_deleted = $scope.all_messages[0];
             	$scope.all_messages.shift();
             	
@@ -155,7 +147,7 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope, $
 				});
 
             }
-            console.log('max_id : %o', $rootScope.max_id);
+            
             $scope.all_messages.push($scope.inject_message);
 
 			$http({
@@ -167,13 +159,13 @@ app.controller('friends_and_messagesCtrl', function($scope, $http, $rootScope, $
 					'friend'      : $scope.current_friend['name'],
 				}
 			}).error(function(){
+				// need something like growl
 				console.log("error: %o", response);
 			});
 
 			$scope.the_message = '';
 
 			var message_body = document.getElementById("messages_body_id");
-			// console.log(message_body.scrollHeight);
 			message_body.scrollTop = message_body.scrollHeight;
 		}
 	};
@@ -240,8 +232,6 @@ app.controller('friend_requestsCtrl', function( $scope, $http, $rootScope ){
 		}
 
 	};
-
-	$scope.pop_db = function(){console.log('popping');};
 
 });
 

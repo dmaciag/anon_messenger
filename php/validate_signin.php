@@ -11,8 +11,8 @@ if( !$connect ) die('Connection to mysql failed, error : ' . mysql_error());
 
 if( !mysql_select_db($db_db) ) die('Cannot connect to db : $db_db, ' . mysql_error());
 
-$username = $_POST[username];
-$password = $_POST[password];
+$username = $_POST['username'];
+$password = $_POST['password'];
 
 $username = strip_data($username);
 $password = strip_data($password);
@@ -46,7 +46,7 @@ if( mysql_num_rows($registered_users) === 1 ){
 }
 else{
 	mysql_close($connect);
-	echo "User is not registered. " .'<br>';
+	echo "User is not registered. <br>";
 }
 
 ?>

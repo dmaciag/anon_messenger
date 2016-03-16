@@ -24,12 +24,12 @@ if( !$connect ) die('Connection to mysql failed, error : ' . mysql_error());
 if( !mysql_select_db($db_db) ) die('Cannot connect to db : $db_db, ' . mysql_error());
 
 $insert_message_sql = 
-"INSERT INTO messages   (message,    sender,    receiver,    date_created)
- VALUES      		  ('$message', '$sender', '$receiver', '$date_created')";
+"INSERT INTO messages   (message,    date_created,    sender,    receiver)
+ VALUES      		  ('$message', '$date_created', '$sender', '$receiver')";
 
 $insert_message = mysql_query($insert_message_sql);
 
-echo json_encode('test_response');
+if(!$insert_message) die('Failed to send message');
 
 mysql_close($connect);
 

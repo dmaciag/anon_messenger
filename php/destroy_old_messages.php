@@ -20,7 +20,7 @@ $message_to_be_destroyed = json_decode( file_get_contents('php://input') , true)
 if( !empty( $message_to_be_destroyed ) ){
 
     $message_id = $message_to_be_destroyed['del_message']['id'];
-    if( !empty( $messages_id ) ){
+    if( !empty( $message_id ) ){
         $delete_sql = "DELETE FROM messages WHERE id = '$message_id'"; 
         mysql_query( $delete_sql );
     }

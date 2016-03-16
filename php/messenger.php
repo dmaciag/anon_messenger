@@ -54,7 +54,6 @@
         </div>
         <div class="welcome_messages">
           Up to 20 messages are tracked between you and your budy. <br>
-          Messages older than 30 seconds are deleted. <br>  
         </div>
       </div>
       <div class="messages_body" id="messages_body_id" ng-if="!is_on_default_page" scroll-glue>
